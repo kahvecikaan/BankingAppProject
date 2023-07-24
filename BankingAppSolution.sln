@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingApp.DAL", "BankingApp.DAL\BankingApp.DAL.csproj", "{1DEF6A2B-94B3-40DC-9DAE-01F6C4E08913}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PasswordUtility", "..\PasswordHelper\PasswordHelper\PasswordUtility.csproj", "{118718EA-7F3C-4279-976D-81A86A3B513D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingApp.BLL", "BankingApp.BLL\BankingApp.BLL.csproj", "{E5FEE846-8FA5-4DC2-A903-C8A1AC398F45}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingApp.PasswordUpdater", "BankingApp.PasswordUpdater\BankingApp.PasswordUpdater.csproj", "{C2E91ACC-0E48-4711-8A47-8168A5B56F52}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingApp.Domain", "BankingApp.Domain\BankingApp.Domain.csproj", "{F2EBF980-ECA3-414E-BCAC-A426C912870E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingApp.UI", "BankingApp.UI\BankingApp.UI.csproj", "{A62EBD1B-BA20-4207-B2D8-C1FC5D186939}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingApp.UI", "BankingApp.UI\BankingApp.UI.csproj", "{A62EBD1B-BA20-4207-B2D8-C1FC5D186939}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PasswordUtility", "PasswordUtility\PasswordHelper\PasswordUtility.csproj", "{279B6A86-B95E-4F14-988F-E2E65C8057AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{1DEF6A2B-94B3-40DC-9DAE-01F6C4E08913}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DEF6A2B-94B3-40DC-9DAE-01F6C4E08913}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DEF6A2B-94B3-40DC-9DAE-01F6C4E08913}.Release|Any CPU.Build.0 = Release|Any CPU
-		{118718EA-7F3C-4279-976D-81A86A3B513D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{118718EA-7F3C-4279-976D-81A86A3B513D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{118718EA-7F3C-4279-976D-81A86A3B513D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{118718EA-7F3C-4279-976D-81A86A3B513D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5FEE846-8FA5-4DC2-A903-C8A1AC398F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5FEE846-8FA5-4DC2-A903-C8A1AC398F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5FEE846-8FA5-4DC2-A903-C8A1AC398F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{A62EBD1B-BA20-4207-B2D8-C1FC5D186939}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A62EBD1B-BA20-4207-B2D8-C1FC5D186939}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A62EBD1B-BA20-4207-B2D8-C1FC5D186939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{279B6A86-B95E-4F14-988F-E2E65C8057AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{279B6A86-B95E-4F14-988F-E2E65C8057AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{279B6A86-B95E-4F14-988F-E2E65C8057AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{279B6A86-B95E-4F14-988F-E2E65C8057AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\PasswordHelper\PasswordHelper\PasswordUtility.csproj" />
     <ProjectReference Include="..\BankingApp.DAL\BankingApp.DAL.csproj" />
+    <ProjectReference Include="..\PasswordUtility\PasswordHelper\PasswordUtility.csproj" />
   </ItemGroup>
 
 </Project>
