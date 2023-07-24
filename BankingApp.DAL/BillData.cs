@@ -1,0 +1,160 @@
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Collections.Generic;
+using BankingApp.Domain;
+
+namespace BankingApp.DAL
+{
+    public class BillData
+    {
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["BankingAppConnectionString"].ConnectionString;
+
+        public void InsertBill(Bill bill)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.InsertBill", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@CustomerId", bill.CustomerId);
+                    command.Parameters.AddWithValue("@DateIssued", bill.DateIssued);
+                    command.Parameters.AddWithValue("@DueDate", bill.DueDate);
+                    command.Parameters.AddWithValue("@AmountDue", bill.AmountDue);
+                    command.Parameters.AddWithValue("@BillStatus", bill.BillStatus);
+
+                    
+
+                    SqlParameter outputIdParam = new SqlParameter("@NewBillId", SqlDbType.Int);
+                    outputIdParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(outputIdParam);
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1); // NVARCHAR(MAX), -1 indicates 'max'
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter("@ReturnValue", SqlDbType.Int);
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                    // bill.BillId = (int)outputIdParam.Value;
+                    if (outputIdParam.Value != DBNull.Value)
+                        bill.BillId = (int)outputIdParam.Value;
+
+                    if ((int)returnValue.Value == -1)
+                        throw new Exception($"An error occurred during the InsertBill procedure in the database: {errorMessageParam.Value}");
+                }
+            }
+        }
+
+        public bool UpdateBill(Bill bill)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.UpdateBill", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@BillId", bill.BillId);
+                    command.Parameters.AddWithValue("@CustomerId", bill.CustomerId);
+                    command.Parameters.AddWithValue("@DateIssued", bill.DateIssued);
+                    command.Parameters.AddWithValue("@DueDate", bill.DueDate);
+                    command.Parameters.AddWithValue("@AmountDue", bill.AmountDue);
+                    command.Parameters.AddWithValue("@BillStatus", bill.BillStatus);
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1); // NVARCHAR(MAX), -1 indicates 'max'
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                    if ((int)returnValue.Value == -1)
+                        throw new Exception($"An error occurred during the UpdateBill procedure in the database: {errorMessageParam.Value}");
+                    return true;
+                }
+            }
+        }
+
+        public List<Bill> FetchBillsByCustomer(int customerId)
+        {
+            var bills = new List<Bill>();
+
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.FetchBillsByCustomer", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@CustomerId", customerId);
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1); // NVARCHAR(MAX), -1 indicates 'max'
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var bill = new Bill();
+                            bill.BillId = (int)reader["BillId"];
+                            bill.CustomerId = (int)reader["CustomerId"];
+                            bill.DateIssued = (DateTime)reader["DateIssued"];
+                            bill.DueDate = (DateTime)reader["DueDate"];
+                            bill.AmountDue = (decimal)reader["AmountDue"];
+                            bill.BillStatus = reader["BillStatus"].ToString();
+                            bills.Add(bill);
+                        }
+                    }
+
+                    if ((int)returnValue.Value == -1)
+                        throw new Exception($"An error occurred during the FetchBillsByCustomer procedure in the database: {errorMessageParam.Value}");
+
+                    return bills; 
+                }
+            }
+        }
+
+        public void DeleteBill(int billId)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.DeleteBill", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@BillId", billId);
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1); // NVARCHAR(MAX), -1 indicates 'max'
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                    if ((int)returnValue.Value == -1)
+                        throw new Exception($"An error occurred during the DeleteBill procedure in the database: {errorMessageParam.Value}");
+                }
+            }
+        }
+    }
+}

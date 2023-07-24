@@ -1,0 +1,31 @@
+﻿<Window x:Class="BankingApp.UI.SearchCustomersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Search Customers" Height="400" Width="800" Background="#F4F482">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
+            <Label Content="Customer ID:" Margin="10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="CustomerIdTextBox" Width="120" VerticalAlignment="Center" Text="{Binding CustomerId, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="First Name:" Margin="10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="FirstNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Last Name:" Margin="10,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="LastNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button x:Name="SearchButton" Content="Search" Width="75" Margin="10,0" VerticalAlignment="Center" Command="{Binding SearchCustomersCommand}"/>
+        </StackPanel>
+        <DataGrid x:Name="CustomersDataGrid" Grid.Row="1" Margin="10,0" ItemsSource="{Binding Customers}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerId}"/>
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
+                <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Account Type" Binding="{Binding AccountType}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

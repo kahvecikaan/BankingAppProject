@@ -1,0 +1,32 @@
+﻿<Window x:Class="BankingApp.UI.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Login" Height="450" Width="800"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Background="#FB6107">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Username:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,0" FontSize="16" FontWeight="Bold"/>
+        <TextBox Name="UsernameTextBox" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0,10" FontSize="16" HorizontalAlignment="Stretch" />
+
+        <Label Content="Password:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,10,0" FontSize="16" FontWeight="Bold"/>
+        <PasswordBox Name="PasswordTextBox" PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="2" Grid.Column="1" Margin="0,10" FontSize="16" HorizontalAlignment="Stretch" />
+
+
+        <Button Content="Login" Grid.Row="4" Grid.Column="1" Command="{Binding LoginCommand}" Width="200" Height="80" Margin="0,20" FontSize="30" FontWeight="Bold" Background="#231123" Foreground="White" BorderBrush="#F4F482" BorderThickness="9" IsDefault="True"/>
+    </Grid>
+</Window>
