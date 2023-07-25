@@ -1,5 +1,4 @@
-﻿using BankingApp.BLL;
-using BankingApp.UI.ViewModels;
+﻿using BankingApp.UI.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 
