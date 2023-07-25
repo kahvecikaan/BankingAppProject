@@ -13,22 +13,13 @@
                 Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0"
                 Background="#FB6107" Foreground="#231123" BorderBrush="#6369D1" BorderThickness="2" 
                 FontSize="16" FontWeight="Bold">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="SkyBlue" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="SteelBlue" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Button.Template>
+            <!-- Button template -->
+        </Button>
+        <Button Content="Add Bills" Command="{Binding NavigateToAddBillCommand}" 
+                Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,160,0,0"
+                Background="#FB6107" Foreground="#231123" BorderBrush="#6369D1" BorderThickness="2" 
+                FontSize="16" FontWeight="Bold">
+            <!-- Button template -->
         </Button>
     </Grid>
-
 </Window>

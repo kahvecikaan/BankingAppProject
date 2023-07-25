@@ -8,19 +8,29 @@ namespace BankingApp.BLL
     public class BillService
     {
         private readonly BillData _billData;
+        private readonly CustomerService _customerService;
 
-        public BillService(BillData billData)
+        public BillService(BillData billData, CustomerService customerService)
         {
             this._billData = billData;
+            this._customerService = customerService;
         }
 
         public void InsertBill(Bill bill)
         {
+            if(!_customerService.IsCustomerExist(bill.CustomerId))
+            {
+                throw new Exception($"Customer with {bill.CustomerId} does not exist!");
+            }
             this._billData.InsertBill(bill);
         }
 
         public bool UpdateBill(Bill bill)
         {
+            if (!_customerService.IsCustomerExist(bill.CustomerId))
+            {
+                throw new Exception($"Customer with {bill.CustomerId} does not exist!");
+            }
             return this._billData.UpdateBill(bill);
         }
 

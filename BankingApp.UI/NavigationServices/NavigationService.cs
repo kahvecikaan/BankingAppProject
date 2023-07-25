@@ -27,6 +27,10 @@ namespace BankingApp.UI.NavigationServices
                     var searchCustomersWindow = new SearchCustomersWindow(searchCustomersViewModel);
                     searchCustomersWindow.Show();
                     break;
+                case AddBillsViewModel addBillsViewModel:
+                    var addBillsWindow = new AddBillsWindow(addBillsViewModel);
+                    addBillsWindow.Show();
+                    break;
             }
         }
     }
