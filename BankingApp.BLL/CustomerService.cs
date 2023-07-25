@@ -37,5 +37,10 @@ namespace BankingApp.BLL
         {
             return this._customerData.SearchCustomers(customerId, firstName, lastName);
         }
+
+        public bool IsCustomerExist(int customerId)
+        {
+            return this._customerData.FetchCustomer(customerId) != null;
+        }
     }
 }
