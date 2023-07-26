@@ -7,15 +7,16 @@ namespace BankingApp.UI
         public AddBillsWindow(AddBillsViewModel viewModel)
         {
             InitializeComponent();
-            viewModel.ClearFieldsAction = () =>
-                            {
-                                CustomerIdTextBox.Clear();
-                                DateIssuedPicker.SelectedDate = null;
-                                DueDatePicker.SelectedDate = null;
-                                AmountDueTextBox.Clear();
-                                BillStatusTextBox.Clear();
-                            };
+            //viewModel.ClearFieldsAction = () =>
+            //                {
+            //                    CustomerIdTextBox.Clear();
+            //                    DateIssuedPicker.SelectedDate = null;
+            //                    DueDatePicker.SelectedDate = null;
+            //                    AmountDueTextBox.Clear();
+            //                    BillStatusTextBox.Clear();
+            //                };
             DataContext = viewModel;
+            viewModel.CloseAction = Close;
         }
 
         // Instead of lambda expression, we could also define a separate method

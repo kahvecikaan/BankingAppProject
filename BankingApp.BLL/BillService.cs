@@ -10,6 +10,8 @@ namespace BankingApp.BLL
         private readonly BillData _billData;
         private readonly CustomerService _customerService;
 
+        public event System.Action BillAdded = delegate { };
+
         public BillService(BillData billData, CustomerService customerService)
         {
             this._billData = billData;
@@ -23,6 +25,7 @@ namespace BankingApp.BLL
                 throw new Exception($"Customer with {bill.CustomerId} does not exist!");
             }
             this._billData.InsertBill(bill);
+            BillAdded.Invoke();
         }
 
         public bool UpdateBill(Bill bill)
@@ -42,6 +45,16 @@ namespace BankingApp.BLL
         public void DeleteBill(int billId)
         {
             this._billData.DeleteBill(billId);
+        }
+
+        public List<Bill> FetchAllBills()
+        {
+            return this._billData.FetchAllBills();
+        }
+
+        public Bill FetchBillById(int billId)
+        {
+            return this._billData.FetchBillById(billId);
         }
     }
 }
