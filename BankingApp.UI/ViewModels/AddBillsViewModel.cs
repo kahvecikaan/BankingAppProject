@@ -19,6 +19,8 @@ namespace BankingApp.UI.ViewModels
         private decimal _amountDue;
         private string _billStatus;
 
+        public System.Action ClearFieldsAction { get; set; }
+
         public AddBillsViewModel(BillService billService, CustomerService customerService, INavigationService navigationService)
         {
             _billService = billService;
@@ -89,11 +91,14 @@ namespace BankingApp.UI.ViewModels
 
         public void AddBill(object parameter)
         {
-            if(_customerService.IsCustomerExist(CustomerId))
+            if (_customerService.IsCustomerExist(CustomerId))
             {
                 var bill = new Bill { CustomerId = this.CustomerId, DateIssued = this.DateIssued, DueDate = this.DueDate, AmountDue = this.AmountDue, BillStatus = this.BillStatus };
                 _billService.InsertBill(bill);
                 MessageBox.Show("New bill added successfully!");
+
+                // Invoke the action to clear the fields in the view
+                ClearFieldsAction?.Invoke();
 
                 // Navigate back to the MainWindow after adding the bill
                 //var mainViewModel = new MainViewModel(_userService, _customerService, _billService, _navigationService);
@@ -104,11 +109,14 @@ namespace BankingApp.UI.ViewModels
             {
                 MessageBox.Show("The provided Customer ID does not exist. Please check and try again.", "Invalid Customer ID", MessageBoxButton.OK, MessageBoxImage.Warning);
                 //Reset all fields
-                CustomerId = 0;
-                DateIssued = DateTime.Now;
-                DueDate = DateTime.Now;
-                AmountDue = 0;
-                BillStatus = string.Empty;
+                //CustomerId = 0;
+                //DateIssued = DateTime.Now;
+                //DueDate = DateTime.Now;
+                //AmountDue = 0;
+                //BillStatus = string.Empty;
+
+                // Invoke the action to clear the fields in the view
+                ClearFieldsAction?.Invoke();
             }
         }
     }
