@@ -107,15 +107,7 @@ namespace BankingApp.UI.ViewModels
 
             else
             {
-                MessageBox.Show("The provided Customer ID does not exist. Please check and try again.", "Invalid Customer ID", MessageBoxButton.OK, MessageBoxImage.Warning);
-                //Reset all fields
-                //CustomerId = 0;
-                //DateIssued = DateTime.Now;
-                //DueDate = DateTime.Now;
-                //AmountDue = 0;
-                //BillStatus = string.Empty;
-
-                // Invoke the action to clear the fields in the view
+                MessageBox.Show("The provided Customer ID does not exist. Please check and try again.", "Invalid Customer ID", MessageBoxButton.OK, MessageBoxImage.Warning);               
                 ClearFieldsAction?.Invoke();
             }
         }
