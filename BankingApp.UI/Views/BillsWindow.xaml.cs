@@ -1,11 +1,8 @@
 ﻿using System.Windows;
 using BankingApp.UI.ViewModels;
 
-namespace BankingApp.UI
+namespace BankingApp.UI.Views
 {
-    /// <summary>
-    /// Interaction logic for BillsWindow.xaml
-    /// </summary>
     public partial class BillsWindow : Window
     {
         public BillsWindow(BillsViewModel viewModel)

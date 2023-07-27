@@ -1,4 +1,4 @@
-﻿<Window x:Class="BankingApp.UI.LoginWindow"
+﻿<Window x:Class="BankingApp.UI.Views.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Login" Height="450" Width="800"

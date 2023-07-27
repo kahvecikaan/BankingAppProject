@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BankingApp.UI
+namespace BankingApp.UI.Views
 {
     public partial class LoginWindow : Window
     {

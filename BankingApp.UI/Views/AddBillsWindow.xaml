@@ -1,4 +1,4 @@
-﻿<Window x:Class="BankingApp.UI.AddBillsWindow"
+﻿<Window x:Class="BankingApp.UI.Views.AddBillsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Add Bills" Height="400" Width="800" Background="#F4F482">

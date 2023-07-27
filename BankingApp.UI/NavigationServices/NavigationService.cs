@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using BankingApp.BLL;
 using BankingApp.UI.ViewModels;
+using BankingApp.UI.Views;
 
 namespace BankingApp.UI.NavigationServices
 {
