@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace BankingApp.UI
+namespace BankingApp.UI.Views
 {
     public partial class MainWindow : Window
     {

@@ -3,6 +3,7 @@ using BankingApp.BLL;
 using BankingApp.DAL;
 using BankingApp.UI.NavigationServices;
 using BankingApp.UI.ViewModels;
+using BankingApp.UI.Events;
 
 namespace BankingApp.UI
 {
@@ -16,9 +17,11 @@ namespace BankingApp.UI
             CustomerService customerService = new CustomerService(new CustomerData());
             BillService billService = new BillService(new BillData(), customerService);
 
+            IEventAggregator eventAggregator = new EventAggregator();
+
             INavigationService navigationService = new NavigationService();
 
-            LoginViewModel loginViewModel = new LoginViewModel(userService, customerService, billService, navigationService);
+            LoginViewModel loginViewModel = new LoginViewModel(userService, customerService, billService, navigationService, eventAggregator);
 
             navigationService.Navigate(loginViewModel);
         }

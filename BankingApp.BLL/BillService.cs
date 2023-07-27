@@ -10,7 +10,7 @@ namespace BankingApp.BLL
         private readonly BillData _billData;
         private readonly CustomerService _customerService;
 
-        public event System.Action BillAdded = delegate { };
+        // public event System.Action BillAdded = delegate { };
 
         public BillService(BillData billData, CustomerService customerService)
         {
@@ -25,7 +25,7 @@ namespace BankingApp.BLL
                 throw new Exception($"Customer with {bill.CustomerId} does not exist!");
             }
             this._billData.InsertBill(bill);
-            BillAdded.Invoke();
+            // BillAdded.Invoke();
         }
 
         public bool UpdateBill(Bill bill)
