@@ -56,5 +56,10 @@ namespace BankingApp.BLL
         {
             return this._billData.FetchBillById(billId);
         }
+
+        public List<BillDetails> FetchAllBillDetails()
+        {
+            return this._billData.FetchAllBillDetails();
+        }
     }
 }

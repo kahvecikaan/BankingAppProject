@@ -13,6 +13,8 @@
         <DataGrid ItemsSource="{Binding Bills}" SelectedItem="{Binding SelectedBill}" AutoGenerateColumns="False" Grid.Row="1" Margin="10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerId}" />
+                <DataGridTextColumn Header="First Name" Binding="{Binding CustomerFirstName}" />
+                <DataGridTextColumn Header="Last Name" Binding="{Binding CustomerLastName}" />
                 <DataGridTextColumn Header="Date Issued" Binding="{Binding DateIssued}" />
                 <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}" />
                 <DataGridTextColumn Header="Amount Due" Binding="{Binding AmountDue}" />
@@ -31,4 +33,3 @@
         </DataGrid>
     </Grid>
 </Window>
-

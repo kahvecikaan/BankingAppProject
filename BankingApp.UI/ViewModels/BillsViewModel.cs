@@ -14,8 +14,8 @@ namespace BankingApp.UI.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
 
-        private Bill _selectedBill;
-        public Bill SelectedBill
+        private BillDetails _selectedBill;
+        public BillDetails SelectedBill
         {
             get { return _selectedBill; }
             set
@@ -25,7 +25,7 @@ namespace BankingApp.UI.ViewModels
             }
         }
 
-        public ObservableCollection<Bill> Bills { get; set; }
+        public ObservableCollection<BillDetails> Bills { get; set; }
 
         public RelayCommand DeleteBillCommand { get; set; }
         public RelayCommand UpdateBillCommand { get; set; }
@@ -39,7 +39,7 @@ namespace BankingApp.UI.ViewModels
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe<BillUpdatedEvent>(OnBillUpdated);
 
-            Bills = new ObservableCollection<Bill>(_billService.FetchAllBills());
+            Bills = new ObservableCollection<BillDetails>(_billService.FetchAllBillDetails());
 
             DeleteBillCommand = new RelayCommand(DeleteBill, _ => SelectedBill != null);
             UpdateBillCommand = new RelayCommand(UpdateBill, _ => SelectedBill != null);
@@ -54,7 +54,7 @@ namespace BankingApp.UI.ViewModels
 
         private void UpdateBill(object obj)
         {
-            var addBillsViewModel = new AddBillsViewModel(_billService, _customerService, _navigationService, _eventAggregator, SelectedBill);
+            var addBillsViewModel = new AddBillsViewModel(_billService, _customerService, _navigationService, _eventAggregator, SelectedBill.ToBill());
             _navigationService.Navigate(addBillsViewModel);
         }
         
@@ -66,7 +66,7 @@ namespace BankingApp.UI.ViewModels
 
         private void OnBillUpdated(BillUpdatedEvent billUpdatedEvent)
         {
-            Bills = new ObservableCollection<Bill>(_billService.FetchAllBills());
+            Bills = new ObservableCollection<BillDetails>(_billService.FetchAllBillDetails());
             OnPropertyChanged(nameof(Bills));
         }
     }
