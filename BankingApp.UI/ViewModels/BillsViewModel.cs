@@ -25,6 +25,19 @@ namespace BankingApp.UI.ViewModels
             }
         }
 
+        private BillFilter _billFilter;
+        public BillFilter BillFilter
+        {
+            get { return _billFilter; }
+            set
+            {
+                _billFilter = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RelayCommand SearchBillsCommand { get; set; }
+
         public ObservableCollection<BillDetails> Bills { get; set; }
 
         public RelayCommand DeleteBillCommand { get; set; }
@@ -41,9 +54,12 @@ namespace BankingApp.UI.ViewModels
 
             Bills = new ObservableCollection<BillDetails>(_billService.FetchAllBillDetails());
 
+            BillFilter = new BillFilter();
+
             DeleteBillCommand = new RelayCommand(DeleteBill, _ => SelectedBill != null);
             UpdateBillCommand = new RelayCommand(UpdateBill, _ => SelectedBill != null);
             NavigateToAddBillCommand = new RelayCommand(NavigateToAddBill, _ => true);
+            SearchBillsCommand = new RelayCommand(SearchBills, _ => true);
         }
 
         private void DeleteBill(object obj)
@@ -68,6 +84,18 @@ namespace BankingApp.UI.ViewModels
         {
             Bills = new ObservableCollection<BillDetails>(_billService.FetchAllBillDetails());
             OnPropertyChanged(nameof(Bills));
+        }
+
+        private void SearchBills(object obj)
+        {
+            var bills = _billService.SearchBillDetails(BillFilter);
+            Bills.Clear();
+
+            foreach (var bill in bills)
+            {
+                Bills.Add(bill);
+            }
+            OnPropertyChanged(nameof(Bills)); // Notify UI about the changes
         }
     }
 }

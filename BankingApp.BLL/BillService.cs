@@ -61,5 +61,10 @@ namespace BankingApp.BLL
         {
             return this._billData.FetchAllBillDetails();
         }
+
+        public List<BillDetails> SearchBillDetails(BillFilter filter)
+        {
+            return this._billData.SearchBillDetails(filter);
+        }
     }
 }

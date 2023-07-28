@@ -289,6 +289,63 @@ namespace BankingApp.DAL
                 }
             }
         }
+
+        public List<BillDetails> SearchBillDetails(BillFilter filter)
+        {
+            var billDetailsList = new List<BillDetails>();
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.SearchBillDetails", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@BillId", (object)filter.BillId ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@CustomerId", (object)filter.CustomerId ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@DateIssuedFrom", (object)filter.DateIssuedFrom ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@DateIssuedTo", (object)filter.DateIssuedTo ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@DueDateFrom", (object)filter.DueDateFrom ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@DueDateTo", (object)filter.DueDateTo ?? DBNull.Value);
+                    command.Parameters.AddWithValue("AmountDueFrom", (object)filter.AmountDueFrom ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@AmountDueTo", (object)filter.AmountDueTo ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@FirstName", (object)filter.FirstName ?? DBNull.Value);
+                    command.Parameters.AddWithValue("LastName", (object)filter.LastName ?? DBNull.Value);
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1);
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var billDetails = new BillDetails();
+                            billDetails.BillId = (int)reader["BillId"];
+                            billDetails.CustomerId = (int)reader["CustomerId"];
+                            billDetails.CustomerFirstName = reader["FirstName"].ToString();
+                            billDetails.CustomerLastName = reader["LastName"].ToString();
+                            billDetails.DateIssued = (DateTime)reader["DateIssued"];
+                            billDetails.DueDate = (DateTime)reader["DueDate"];
+                            billDetails.AmountDue = (decimal)reader["AmountDue"];
+                            billDetails.BillStatus = reader["BillStatus"].ToString();
+                            billDetailsList.Add(billDetails);
+                        }
+                    }
+
+                    if ((int)returnValue.Value == -1)
+                    {
+                        throw new Exception($"An exception occurred during the FetchAllBillDetails procedure in the database: {errorMessageParam.Value}");
+                    }
+
+                    return billDetailsList;
+                }
+            }
+        }
     }
 }
 
