@@ -12,6 +12,7 @@
 
         <DataGrid ItemsSource="{Binding Bills}" SelectedItem="{Binding SelectedBill}" AutoGenerateColumns="False" Grid.Row="1" Margin="10">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Bill ID" Binding="{Binding BillId}"/>
                 <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerId}" />
                 <DataGridTextColumn Header="First Name" Binding="{Binding CustomerFirstName}" />
                 <DataGridTextColumn Header="Last Name" Binding="{Binding CustomerLastName}" />
