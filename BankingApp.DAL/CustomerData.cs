@@ -289,6 +289,10 @@ namespace BankingApp.DAL
                             customerDetails.CustomerId = (int)reader["CustomerId"];
                             customerDetails.FirstName = reader["FirstName"].ToString();
                             customerDetails.LastName = reader["LastName"].ToString();
+                            customerDetails.DateOfBirth = (DateTime)reader["DateOfBirth"];
+                            customerDetails.Email = reader["Email"].ToString();
+                            customerDetails.Address = reader["Address"].ToString();
+                            customerDetails.PhoneNumber = reader["PhoneNumber"].ToString();
                             customerDetails.AccountType = reader["AccountType"].ToString();
                             customerDetailsList.Add(customerDetails);
                         }
