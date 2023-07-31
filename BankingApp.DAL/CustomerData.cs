@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 using BankingApp.Domain;
-using System.Collections.Generic;
 
 namespace BankingApp.DAL
 {
@@ -206,6 +206,100 @@ namespace BankingApp.DAL
                     }
 
                     return customers;
+                }
+            }
+        }
+
+        public List<CustomerDetails> FetchAllCustomerDetails()
+        {
+            var customerDetailsList = new List<CustomerDetails>();
+
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.FetchAllCustomerDetails", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1);
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+
+                    using(SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            var customerDetails = new CustomerDetails();
+                            customerDetails.CustomerId = (int)reader["CustomerId"];
+                            customerDetails.FirstName = reader["FirstName"].ToString();
+                            customerDetails.LastName = reader["LastName"].ToString();
+                            customerDetails.DateOfBirth = (DateTime)reader["DateOfBirth"];
+                            customerDetails.Email = reader["Email"].ToString();
+                            customerDetails.Address = reader["Address"].ToString();
+                            customerDetails.PhoneNumber = reader["PhoneNumber"].ToString();
+                            customerDetails.AccountType = reader["AccountType"].ToString();
+                            customerDetailsList.Add(customerDetails);
+                        }
+                    }
+
+                    if ((int)returnValue.Value == -1)
+                    {
+                        throw new Exception($"An exception occurred during the FetchAllCustomerDetails procedure in the database: {errorMessageParam.Value}");
+                    }
+
+                    return customerDetailsList;
+                }
+            }
+        }
+
+        public List<CustomerDetails> SearchCustomerDetails(CustomerFilter filter)
+        {
+            var customerDetailsList = new List<CustomerDetails>();
+            using(SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using(SqlCommand command = new SqlCommand("dbo.SearchCustomerDetails", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@CustomerId", (object)filter.CustomerId ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@FirstName", (object)filter.FirstName ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@LastName", (object)filter.LastName ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@AccountType", (object)filter.AccountType ?? DBNull.Value);
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1);
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+
+                    using(SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            var customerDetails = new CustomerDetails();
+                            customerDetails.CustomerId = (int)reader["CustomerId"];
+                            customerDetails.FirstName = reader["FirstName"].ToString();
+                            customerDetails.LastName = reader["LastName"].ToString();
+                            customerDetails.AccountType = reader["AccountType"].ToString();
+                            customerDetailsList.Add(customerDetails);
+                        }
+                    }
+
+                    if ((int)returnValue.Value == -1)
+                    {
+                        throw new Exception($"An exception occurred during the FetchAllCustomerDetails procedure in the database: {errorMessageParam.Value}");
+                    }
+
+                    return customerDetailsList;
                 }
             }
         }

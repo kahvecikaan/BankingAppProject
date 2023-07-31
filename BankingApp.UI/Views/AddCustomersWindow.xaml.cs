@@ -1,10 +1,14 @@
 ﻿using System.Windows;
 using BankingApp.UI.ViewModels;
+
 namespace BankingApp.UI.Views
 {
-    public partial class AddBillsWindow : Window
+    /// <summary>
+    /// Interaction logic for AddCustomersWindow.xaml
+    /// </summary>
+    public partial class AddCustomersWindow : Window
     {
-        public AddBillsWindow(AddBillsViewModel viewModel)
+        public AddCustomersWindow(AddCustomersViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

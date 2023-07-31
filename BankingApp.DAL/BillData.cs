@@ -305,10 +305,10 @@ namespace BankingApp.DAL
                     command.Parameters.AddWithValue("@DateIssuedTo", (object)filter.DateIssuedTo ?? DBNull.Value);
                     command.Parameters.AddWithValue("@DueDateFrom", (object)filter.DueDateFrom ?? DBNull.Value);
                     command.Parameters.AddWithValue("@DueDateTo", (object)filter.DueDateTo ?? DBNull.Value);
-                    command.Parameters.AddWithValue("AmountDueFrom", (object)filter.AmountDueFrom ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@AmountDueFrom", (object)filter.AmountDueFrom ?? DBNull.Value);
                     command.Parameters.AddWithValue("@AmountDueTo", (object)filter.AmountDueTo ?? DBNull.Value);
                     command.Parameters.AddWithValue("@FirstName", (object)filter.FirstName ?? DBNull.Value);
-                    command.Parameters.AddWithValue("LastName", (object)filter.LastName ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@LastName", (object)filter.LastName ?? DBNull.Value);
 
                     SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1);
                     errorMessageParam.Direction = ParameterDirection.Output;

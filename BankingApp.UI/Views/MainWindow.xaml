@@ -15,16 +15,24 @@
                 FontSize="16" FontWeight="Bold">
             <!-- Button template -->
         </Button>
-        <Button Content="Add Bills" Command="{Binding NavigateToAddBillCommand}" 
+        <!--<Button Content="Add Bills" Command="{Binding NavigateToAddBillCommand}" 
                 Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,160,0,0"
                 Background="#FB6107" Foreground="#231123" BorderBrush="#6369D1" BorderThickness="2" 
                 FontSize="16" FontWeight="Bold">
-            <!-- Button template -->
-        </Button>
+            -->
+        <!-- Button template -->
+        <!--
+        </Button>-->
         <Button Content="Manage Bills" Command="{Binding NavigateToBillsCommand}" 
-        Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,220,0,0"
+        Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,155,0,0"
         Background="#FB6107" Foreground="#231123" BorderBrush="#6369D1" BorderThickness="2" 
         FontSize="16" FontWeight="Bold">
+            <!-- Button template -->
+        </Button>
+        <Button Content="Manage Customers" Command="{Binding NavigateToManageCustomersCommand}" 
+    Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,210,0,0"
+    Background="#FB6107" Foreground="#231123" BorderBrush="#6369D1" BorderThickness="2" 
+    FontSize="16" FontWeight="Bold">
             <!-- Button template -->
         </Button>
 

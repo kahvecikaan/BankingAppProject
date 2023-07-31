@@ -42,5 +42,15 @@ namespace BankingApp.BLL
         {
             return this._customerData.FetchCustomer(customerId) != null;
         }
+
+        public List<CustomerDetails> FetchAllCustomerDetails()
+        {
+            return this._customerData.FetchAllCustomerDetails();
+        }
+
+        public List<CustomerDetails> SearchCustomerDetails(CustomerFilter filter)
+        {
+            return this._customerData.SearchCustomerDetails(filter);
+        }
     }
 }

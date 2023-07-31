@@ -1,0 +1,48 @@
+﻿<Window x:Class="BankingApp.UI.Views.AddCustomersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Customer" Height="400" Width="800" Background="#F4F482">
+    <Grid Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Customer ID:" Grid.Column="0" Grid.Row="0" Margin="0,0,10,0"/>
+        <TextBox x:Name="CustomerIdTextBox" Grid.Column="1" Grid.Row="0" Width="150" Text="{Binding CustomerDetails.CustomerId, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="First Name:" Grid.Column="0" Grid.Row="1" Margin="0,10,10,0"/>
+        <TextBox x:Name="FirstNameTextBox" Grid.Column="1" Grid.Row="1" Width="150" Text="{Binding CustomerDetails.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Last Name:" Grid.Column="0" Grid.Row="2" Margin="0,10,10,0"/>
+        <TextBox x:Name="LastNameTextBox" Grid.Column="1" Grid.Row="2" Width="150" Text="{Binding CustomerDetails.LastName, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Date of Birth:" Grid.Column="0" Grid.Row="3" Margin="0,10,10,0"/>
+        <DatePicker x:Name="DateOfBirthPicker" Grid.Column="1" Grid.Row="3" Width="150" SelectedDate="{Binding CustomerDetails.DateOfBirth, StringFormat=d, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Email:" Grid.Column="0" Grid.Row="4" Margin="0,10,10,0"/>
+        <TextBox x:Name="EmailTextBox" Grid.Column="1" Grid.Row="4" Width="150" Text="{Binding CustomerDetails.Email, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Address:" Grid.Column="0" Grid.Row="5" Margin="0,10,10,0"/>
+        <TextBox x:Name="AddressTextBox" Grid.Column="1" Grid.Row="5" Width="150" Text="{Binding CustomerDetails.Address, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Phone Number:" Grid.Column="0" Grid.Row="6" Margin="0,10,10,0"/>
+        <TextBox x:Name="PhoneNumberTextBox" Grid.Column="1" Grid.Row="6" Width="150" Text="{Binding CustomerDetails.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Account Type:" Grid.Column="0" Grid.Row="7" Margin="0,10,10,0"/>
+        <TextBox x:Name="AccountTypeTextBox" Grid.Column="1" Grid.Row="7" Width="150" Text="{Binding CustomerDetails.AccountType, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Button x:Name="AddCustomerButton" Grid.ColumnSpan="2" Grid.Row="8" Content="{Binding ButtonText}" Width="150" Height="50"   Margin="0,20" VerticalAlignment="Center" Command="{Binding SaveChangesCommand}" IsEnabled="True" Background="#231123" Foreground="White"/>
+    </Grid>
+</Window>
