@@ -70,7 +70,7 @@ namespace BankingApp.UI.ViewModels
 
         private void UpdateCustomer(object obj)
         {
-            var addCustomersViewModel = new AddCustomersViewModel(_customerService, _navigationService, _eventAggregator);
+            var addCustomersViewModel = new AddCustomersViewModel(_customerService, _navigationService, _eventAggregator, SelectedCustomer.ToCustomer());
             _navigationService.Navigate(addCustomersViewModel);
         }
 
