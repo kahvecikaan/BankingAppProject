@@ -20,28 +20,28 @@
         </Grid.RowDefinitions>
 
         <Label Content="Customer ID:" Grid.Column="0" Grid.Row="0" Margin="0,0,10,0"/>
-        <TextBox x:Name="CustomerIdTextBox" Grid.Column="1" Grid.Row="0" Width="150" Text="{Binding CustomerDetails.CustomerId, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="CustomerIdTextBox" Grid.Column="1" Grid.Row="0" Width="150" Text="{Binding CustomerId, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="First Name:" Grid.Column="0" Grid.Row="1" Margin="0,10,10,0"/>
-        <TextBox x:Name="FirstNameTextBox" Grid.Column="1" Grid.Row="1" Width="150" Text="{Binding CustomerDetails.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="FirstNameTextBox" Grid.Column="1" Grid.Row="1" Width="150" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Last Name:" Grid.Column="0" Grid.Row="2" Margin="0,10,10,0"/>
-        <TextBox x:Name="LastNameTextBox" Grid.Column="1" Grid.Row="2" Width="150" Text="{Binding CustomerDetails.LastName, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="LastNameTextBox" Grid.Column="1" Grid.Row="2" Width="150" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Date of Birth:" Grid.Column="0" Grid.Row="3" Margin="0,10,10,0"/>
-        <DatePicker x:Name="DateOfBirthPicker" Grid.Column="1" Grid.Row="3" Width="150" SelectedDate="{Binding CustomerDetails.DateOfBirth, StringFormat=d, UpdateSourceTrigger=PropertyChanged}"/>
+        <DatePicker x:Name="DateOfBirthPicker" Grid.Column="1" Grid.Row="3" Width="150" SelectedDate="{Binding DateOfBirth, StringFormat=d, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanEditDateOfBirth}"/>
 
         <Label Content="Email:" Grid.Column="0" Grid.Row="4" Margin="0,10,10,0"/>
-        <TextBox x:Name="EmailTextBox" Grid.Column="1" Grid.Row="4" Width="150" Text="{Binding CustomerDetails.Email, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="EmailTextBox" Grid.Column="1" Grid.Row="4" Width="150" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Address:" Grid.Column="0" Grid.Row="5" Margin="0,10,10,0"/>
-        <TextBox x:Name="AddressTextBox" Grid.Column="1" Grid.Row="5" Width="150" Text="{Binding CustomerDetails.Address, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="AddressTextBox" Grid.Column="1" Grid.Row="5" Width="150" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Phone Number:" Grid.Column="0" Grid.Row="6" Margin="0,10,10,0"/>
-        <TextBox x:Name="PhoneNumberTextBox" Grid.Column="1" Grid.Row="6" Width="150" Text="{Binding CustomerDetails.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="PhoneNumberTextBox" Grid.Column="1" Grid.Row="6" Width="150" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Account Type:" Grid.Column="0" Grid.Row="7" Margin="0,10,10,0"/>
-        <TextBox x:Name="AccountTypeTextBox" Grid.Column="1" Grid.Row="7" Width="150" Text="{Binding CustomerDetails.AccountType, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="AccountTypeTextBox" Grid.Column="1" Grid.Row="7" Width="150" Text="{Binding AccountType, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button x:Name="AddCustomerButton" Grid.ColumnSpan="2" Grid.Row="8" Content="{Binding ButtonText}" Width="150" Height="50"   Margin="0,20" VerticalAlignment="Center" Command="{Binding SaveChangesCommand}" IsEnabled="True" Background="#231123" Foreground="White"/>
     </Grid>

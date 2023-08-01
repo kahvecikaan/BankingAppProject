@@ -25,7 +25,7 @@ namespace BankingApp.UI.ViewModels
 
         public System.Action ClearFieldsAction { get; set; }
         public System.Action CloseAction { get; set; }
-        public RelayCommand SaveChangesCommand { get; set; }
+        public RelayCommand SaveChangesCommand { get; }
 
         public AddCustomersViewModel(CustomerService customerService, INavigationService navigationService, IEventAggregator eventAggregator, Customer editingCustomer = null)
         {
