@@ -11,6 +11,7 @@ namespace BankingApp.UI.ViewModels
     {
         private readonly BillService _billService;
         private readonly CustomerService _customerService;
+        private readonly ParameterService _parameterService;
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
 
@@ -44,10 +45,11 @@ namespace BankingApp.UI.ViewModels
         public RelayCommand UpdateBillCommand { get; set; }
         public RelayCommand NavigateToAddBillCommand { get; set; }
 
-        public BillsViewModel(BillService billService, CustomerService customerService, INavigationService navigationService, IEventAggregator eventAggregator)
+        public BillsViewModel(BillService billService, CustomerService customerService, ParameterService parameterService, INavigationService navigationService, IEventAggregator eventAggregator)
         {
             _billService = billService;
             _customerService = customerService;
+            _parameterService = parameterService;
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe<BillUpdatedEvent>(OnBillUpdated);
@@ -70,13 +72,13 @@ namespace BankingApp.UI.ViewModels
 
         private void UpdateBill(object obj)
         {
-            var addBillsViewModel = new AddBillsViewModel(_billService, _customerService, _navigationService, _eventAggregator, SelectedBill.ToBill());
+            var addBillsViewModel = new AddBillsViewModel(_billService, _customerService, _parameterService, _navigationService, _eventAggregator, SelectedBill.ToBill());
             _navigationService.Navigate(addBillsViewModel);
         }
         
         private void NavigateToAddBill(object obj)
         {
-            var addBillsViewModel = new AddBillsViewModel(_billService, _customerService, _navigationService, _eventAggregator);
+            var addBillsViewModel = new AddBillsViewModel(_billService, _customerService, _parameterService, _navigationService, _eventAggregator);
             _navigationService.Navigate(addBillsViewModel);
         }
 

@@ -5,6 +5,7 @@ using BankingApp.Domain;
 using BankingApp.UI.Commands;
 using BankingApp.UI.NavigationServices;
 using BankingApp.UI.Events;
+using System.Collections.Generic;
 
 namespace BankingApp.UI.ViewModels
 {
@@ -23,16 +24,20 @@ namespace BankingApp.UI.ViewModels
         private string _accountType;
         private Customer _editingCustomer;
 
+        private List<Parameter> _accountTypeParameters;
+
         public System.Action ClearFieldsAction { get; set; }
         public System.Action CloseAction { get; set; }
         public RelayCommand SaveChangesCommand { get; }
 
-        public AddCustomersViewModel(CustomerService customerService, INavigationService navigationService, IEventAggregator eventAggregator, Customer editingCustomer = null)
+        public AddCustomersViewModel(CustomerService customerService, ParameterService parameterService, INavigationService navigationService, IEventAggregator eventAggregator, Customer editingCustomer = null)
         {
             _customerService = customerService;
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
             _editingCustomer = editingCustomer;
+
+            AccountTypeParameters = parameterService.FetchParametersByType("AccountType");
 
             SaveChangesCommand = new RelayCommand(SaveChanges, CanSaveChanges);
             if(_editingCustomer != null)
@@ -131,6 +136,16 @@ namespace BankingApp.UI.ViewModels
             set
             {
                 _accountType = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<Parameter> AccountTypeParameters
+        {
+            get { return _accountTypeParameters; }
+            set
+            {
+                _accountTypeParameters = value;
                 OnPropertyChanged();
             }
         }

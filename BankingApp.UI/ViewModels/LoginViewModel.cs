@@ -12,6 +12,7 @@ namespace BankingApp.UI.ViewModels
         private readonly UserService _userService;
         private readonly CustomerService _customerService;
         private readonly BillService _billService;
+        private readonly ParameterService _parameterService;
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
         private string _username;
@@ -23,12 +24,13 @@ namespace BankingApp.UI.ViewModels
 
         public Action CloseAction { get; set; }
 
-        public LoginViewModel(UserService userService, CustomerService customerService, BillService billService, INavigationService navigationService, IEventAggregator eventAggregator)
+        public LoginViewModel(UserService userService, CustomerService customerService, BillService billService, ParameterService parameterService, INavigationService navigationService, IEventAggregator eventAggregator)
         {
             _userService = userService;
             _customerService = customerService;
             _navigationService = navigationService;
             _billService = billService;
+            _parameterService = parameterService;
             _eventAggregator = eventAggregator;
             LoginCommand = new RelayCommand(Login, CanLogin);
         }
@@ -71,7 +73,7 @@ namespace BankingApp.UI.ViewModels
             }
             else
             {
-                MainViewModel mainViewModel = new MainViewModel(_userService, _customerService, _billService, _navigationService, _eventAggregator);
+                MainViewModel mainViewModel = new MainViewModel(_userService, _customerService, _billService, _parameterService, _navigationService, _eventAggregator);
                 _navigationService.Navigate(mainViewModel);
                 CloseAction?.Invoke(); // Close the LoginWindow
             }

@@ -5,6 +5,8 @@ using BankingApp.Domain;
 using BankingApp.UI.Commands;
 using BankingApp.UI.NavigationServices;
 using BankingApp.UI.Events;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace BankingApp.UI.ViewModels
 {
@@ -12,6 +14,7 @@ namespace BankingApp.UI.ViewModels
     {
         private readonly BillService _billService;
         private readonly CustomerService _customerService;
+        private readonly ParameterService _parameterService;
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
         // private readonly UserService _userService;
@@ -22,14 +25,15 @@ namespace BankingApp.UI.ViewModels
         private string _billStatus;
         //private Bill _selectedBill;
         private Bill _editingBill;
-        
+
+        private List<Parameter> _billStatusParameters;
 
         public System.Action ClearFieldsAction { get; set; }
         public System.Action CloseAction { get; set; }
         public RelayCommand SaveChangesCommand { get; }
 
 
-        public AddBillsViewModel(BillService billService, CustomerService customerService, INavigationService navigationService, IEventAggregator eventAggregator, Bill editingBill = null)
+        public AddBillsViewModel(BillService billService, CustomerService customerService, ParameterService parameterService, INavigationService navigationService, IEventAggregator eventAggregator, Bill editingBill = null)
         {
             _billService = billService;
             _customerService = customerService;
@@ -38,6 +42,8 @@ namespace BankingApp.UI.ViewModels
 
             _editingBill = editingBill;
             OnPropertyChanged(nameof(ButtonText)); // notify View about ButtonText changes
+
+            BillStatusParameters = parameterService.FetchParametersByType("BillStatus");
 
             SaveChangesCommand = new RelayCommand(SaveChanges, CanSaveChanges);
 
@@ -105,6 +111,16 @@ namespace BankingApp.UI.ViewModels
             set
             {
                 _billStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<Parameter> BillStatusParameters
+        {
+            get { return _billStatusParameters; }
+            set
+            {
+                _billStatusParameters = value;
                 OnPropertyChanged();
             }
         }

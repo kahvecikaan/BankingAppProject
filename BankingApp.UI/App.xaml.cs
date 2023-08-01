@@ -16,12 +16,13 @@ namespace BankingApp.UI
             UserService userService = new UserService(new UserData());
             CustomerService customerService = new CustomerService(new CustomerData());
             BillService billService = new BillService(new BillData(), customerService);
+            ParameterService parameterService = new ParameterService(new ParameterData());
 
             IEventAggregator eventAggregator = new EventAggregator();
 
             INavigationService navigationService = new NavigationService();
 
-            LoginViewModel loginViewModel = new LoginViewModel(userService, customerService, billService, navigationService, eventAggregator);
+            LoginViewModel loginViewModel = new LoginViewModel(userService, customerService, billService, parameterService, navigationService, eventAggregator);
 
             navigationService.Navigate(loginViewModel);
         }

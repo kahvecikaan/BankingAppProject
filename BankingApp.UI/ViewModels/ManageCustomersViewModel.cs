@@ -10,6 +10,7 @@ namespace BankingApp.UI.ViewModels
     public class ManageCustomersViewModel : BaseViewModel
     {
         private readonly CustomerService _customerService;
+        private readonly ParameterService _parameterService;
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
 
@@ -45,9 +46,10 @@ namespace BankingApp.UI.ViewModels
         public RelayCommand NavigateToAddCustomerCommand { get; set; }
 
 
-        public ManageCustomersViewModel(CustomerService customerService, INavigationService navigationService, IEventAggregator eventAggregator)
+        public ManageCustomersViewModel(CustomerService customerService, ParameterService parameterService, INavigationService navigationService, IEventAggregator eventAggregator)
         {
             _customerService = customerService;
+            _parameterService = parameterService;
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe<CustomerUpdatedEvent>(OnCustomerUpdated);
@@ -70,13 +72,13 @@ namespace BankingApp.UI.ViewModels
 
         private void UpdateCustomer(object obj)
         {
-            var addCustomersViewModel = new AddCustomersViewModel(_customerService, _navigationService, _eventAggregator, SelectedCustomer.ToCustomer());
+            var addCustomersViewModel = new AddCustomersViewModel(_customerService, _parameterService, _navigationService, _eventAggregator, SelectedCustomer.ToCustomer());
             _navigationService.Navigate(addCustomersViewModel);
         }
 
         private void NavigateToAddCustomer(object obj)
         {
-            var addCustomersViewModel = new AddCustomersViewModel(_customerService, _navigationService, _eventAggregator);
+            var addCustomersViewModel = new AddCustomersViewModel(_customerService, _parameterService, _navigationService, _eventAggregator);
             _navigationService.Navigate(addCustomersViewModel);
         }
 
