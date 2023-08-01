@@ -52,6 +52,11 @@ namespace BankingApp.UI.ViewModels
                 AmountDue = _editingBill.AmountDue;
                 BillStatus = _editingBill.BillStatus;
             }
+            else
+            {
+                _dateIssued = DateTime.Today;
+                _dueDate = DateTime.Today;
+            }
         }
 
         public int CustomerId
@@ -104,6 +109,7 @@ namespace BankingApp.UI.ViewModels
             }
         }
 
+        public bool CanEditCustomerId => _editingBill == null;
         public string ButtonText => _editingBill != null ? "Update Bill" : "Add Bill";
 
         private bool CanSaveChanges(object parameter)

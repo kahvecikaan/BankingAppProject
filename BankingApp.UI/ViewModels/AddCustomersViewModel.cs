@@ -46,6 +46,10 @@ namespace BankingApp.UI.ViewModels
                 _phoneNumber = _editingCustomer.PhoneNumber;
                 _accountType = _editingCustomer.AccountType;
             }
+            else
+            {
+                _dateOfBirth = DateTime.Today;
+            }
         }
 
         public int CustomerId
@@ -132,6 +136,8 @@ namespace BankingApp.UI.ViewModels
         }
 
         public bool CanEditDateOfBirth => _editingCustomer == null;
+
+        public bool CanEditCustomerId => _editingCustomer == null;
         public string ButtonText => _editingCustomer != null ? "Update Customer" : "Add Customer";
 
         private bool CanSaveChanges(object parameter)
