@@ -54,5 +54,43 @@ namespace BankingApp.DAL
                 }
             }
         }
+
+        public List<string> FetchAllAccountTypes()
+        {
+            var accountTypeList = new List<string>();
+            using(SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.FetchAllAccountTypes", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1);
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var accountType = reader["Description"].ToString();
+                            accountTypeList.Add(accountType);
+                        }
+                    }
+
+                    if ((int)returnValue.Value == -1)
+                    {
+                        throw new Exception($"An error occurred during the FetchParametersByType procedure in the database: {errorMessageParam.Value}");
+                    }
+
+                    return accountTypeList;
+                }
+            }
+        }
     }
 }

@@ -66,7 +66,12 @@
                 <TextBox Width="70" Text="{Binding BillFilter.AmountDueTo}" Margin="5" Grid.Row="2" Grid.Column="1"/>
 
                 <Label Content="Bill Status:" Grid.Row="3" Grid.Column="0"/>
-                <TextBox Width="70" Text="{Binding BillFilter.BillStatus}" Margin="5" Grid.Row="3" Grid.Column="1"/>
+                <ComboBox x:Name="BillStatusComboBox" Grid.Row="3" Grid.Column="1" Width="75"
+                            SelectedValue="{Binding BillFilter.BillStatus}" 
+                            ItemsSource="{Binding BillStatuses}" 
+                            DisplayMemberPath="Description"
+                            SelectedValuePath="Description"/>
+
 
                 <Button Content="Search" Command="{Binding SearchBillsCommand}" Margin="5" Width="75" Grid.Row="4" Grid.Column="0"/>
                 <Button Content="Add" Command="{Binding NavigateToAddBillCommand}" Margin="5" Width="75" Grid.Row="4" Grid.Column="1"/>

@@ -41,6 +41,8 @@ namespace BankingApp.UI.ViewModels
 
         public ObservableCollection<BillDetails> Bills { get; set; }
 
+        public ObservableCollection<Parameter> BillStatuses { get; set; }
+
         public RelayCommand DeleteBillCommand { get; set; }
         public RelayCommand UpdateBillCommand { get; set; }
         public RelayCommand NavigateToAddBillCommand { get; set; }
@@ -57,6 +59,8 @@ namespace BankingApp.UI.ViewModels
             Bills = new ObservableCollection<BillDetails>(_billService.FetchAllBillDetails());
 
             BillFilter = new BillFilter();
+
+            BillStatuses = new ObservableCollection<Parameter>(parameterService.FetchParametersByType("BillStatus"));
 
             DeleteBillCommand = new RelayCommand(DeleteBill, _ => SelectedBill != null);
             UpdateBillCommand = new RelayCommand(UpdateBill, _ => SelectedBill != null);

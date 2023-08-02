@@ -41,6 +41,8 @@ namespace BankingApp.UI.ViewModels
         
         public ObservableCollection<CustomerDetails> Customers { get; set; }
 
+        public ObservableCollection<string> AccountTypes { get; set; }
+
         public RelayCommand DeleteCustomerCommand { get; set; }
         public RelayCommand UpdateCustomerCommand { get; set; }
         public RelayCommand NavigateToAddCustomerCommand { get; set; }
@@ -55,6 +57,8 @@ namespace BankingApp.UI.ViewModels
             _eventAggregator.Subscribe<CustomerUpdatedEvent>(OnCustomerUpdated);
 
             Customers = new ObservableCollection<CustomerDetails>(_customerService.FetchAllCustomerDetails());
+
+            AccountTypes = new ObservableCollection<string>(_parameterService.FetchAllAccountTypes());
 
             CustomerFilter = new CustomerFilter();
 
