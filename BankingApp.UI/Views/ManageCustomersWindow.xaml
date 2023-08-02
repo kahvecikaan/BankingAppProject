@@ -36,7 +36,11 @@
                 <TextBox Width="70" Text="{Binding CustomerFilter.LastName}" Margin="5" Grid.Row="2" Grid.Column="1"/>
 
                 <Label Content="Account Type:" Grid.Row="3" Grid.Column="0"/>
-                <ComboBox ItemsSource="{Binding AccountTypes}" SelectedItem="{Binding CustomerFilter.AccountType}" Width="70" Margin="5" Grid.Row="3" Grid.Column="1"/>
+                <ComboBox ItemsSource="{Binding AccountTypes}" 
+                          SelectedValue="{Binding CustomerFilter.AccountType}" 
+                          DisplayMemberPath="Description" 
+                          SelectedValuePath="Description"  
+                          Width="70" Margin="5" Grid.Row="3" Grid.Column="1"/>
             </Grid>
 
             <Grid Grid.Column="1">

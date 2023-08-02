@@ -41,7 +41,9 @@ namespace BankingApp.UI.ViewModels
         
         public ObservableCollection<CustomerDetails> Customers { get; set; }
 
-        public ObservableCollection<string> AccountTypes { get; set; }
+        //public ObservableCollection<string> AccountTypes { get; set; }
+
+        public ObservableCollection<Parameter> AccountTypes { get; set; }
 
         public RelayCommand DeleteCustomerCommand { get; set; }
         public RelayCommand UpdateCustomerCommand { get; set; }
@@ -58,7 +60,7 @@ namespace BankingApp.UI.ViewModels
 
             Customers = new ObservableCollection<CustomerDetails>(_customerService.FetchAllCustomerDetails());
 
-            AccountTypes = new ObservableCollection<string>(_parameterService.FetchAllAccountTypes());
+            AccountTypes = new ObservableCollection<Parameter>(_parameterService.FetchParametersByType("AccountType"));
 
             CustomerFilter = new CustomerFilter();
 

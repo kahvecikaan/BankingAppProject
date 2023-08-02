@@ -60,7 +60,7 @@ namespace BankingApp.UI.ViewModels
 
             BillFilter = new BillFilter();
 
-            BillStatuses = new ObservableCollection<Parameter>(parameterService.FetchParametersByType("BillStatus"));
+            BillStatuses = new ObservableCollection<Parameter>(_parameterService.FetchParametersByType("BillStatus"));
 
             DeleteBillCommand = new RelayCommand(DeleteBill, _ => SelectedBill != null);
             UpdateBillCommand = new RelayCommand(UpdateBill, _ => SelectedBill != null);
