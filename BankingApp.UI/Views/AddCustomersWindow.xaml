@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Label Content="Customer ID:" Grid.Column="0" Grid.Row="0" Margin="0,0,10,0"/>
@@ -41,14 +42,15 @@
         <TextBox x:Name="PhoneNumberTextBox" Grid.Column="1" Grid.Row="6" Width="150" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Account Type:" Grid.Column="0" Grid.Row="7" Margin="0,10,10,0"/>
-        <Label Content="Account Type:" Grid.Column="0" Grid.Row="7" Margin="0,10,10,0"/>
         <ComboBox x:Name="AccountTypeComboBox" Grid.Column="1" Grid.Row="7" Width="150" 
                             ItemsSource="{Binding AccountTypeParameters}" 
                             SelectedValue="{Binding AccountType, UpdateSourceTrigger=PropertyChanged}"
                             DisplayMemberPath="Description" 
                             SelectedValuePath="Description"/>
 
+        <Label Content="Balance:" Grid.Column="0" Grid.Row="8" Margin="0,10,10,0"/>
+        <TextBox x:Name="BalanceTextBox" Grid.Column="1" Grid.Row="8" Width="150" Text="{Binding Balance, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanEditBalance}"/>
 
-        <Button x:Name="AddCustomerButton" Grid.ColumnSpan="2" Grid.Row="8" Content="{Binding ButtonText}" Width="150" Height="50"   Margin="0,20" VerticalAlignment="Center" Command="{Binding SaveChangesCommand}" IsEnabled="True" Background="#231123" Foreground="White"/>
+        <Button x:Name="AddCustomerButton" Grid.ColumnSpan="2" Grid.Row="9" Content="{Binding ButtonText}" Width="150" Height="50"   Margin="0,20" VerticalAlignment="Center" Command="{Binding SaveChangesCommand}" IsEnabled="True" Background="#231123" Foreground="White"/>
     </Grid>
 </Window>

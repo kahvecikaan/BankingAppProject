@@ -22,6 +22,7 @@ namespace BankingApp.UI.ViewModels
         private DateTime _dateOfBirth;
         private string _phoneNumber;
         private string _accountType;
+        private decimal _balance;
         private Customer _editingCustomer;
 
         private List<Parameter> _accountTypeParameters;
@@ -50,6 +51,7 @@ namespace BankingApp.UI.ViewModels
                 _email = _editingCustomer.Email;
                 _phoneNumber = _editingCustomer.PhoneNumber;
                 _accountType = _editingCustomer.AccountType;
+                _balance = _editingCustomer.Balance;
             }
             else
             {
@@ -140,6 +142,16 @@ namespace BankingApp.UI.ViewModels
             }
         }
 
+        public decimal Balance
+        {
+            get { return _balance; }
+            set
+            {
+                _balance = value;
+                OnPropertyChanged();
+            }
+        }
+
         public List<Parameter> AccountTypeParameters
         {
             get { return _accountTypeParameters; }
@@ -153,6 +165,8 @@ namespace BankingApp.UI.ViewModels
         public bool CanEditDateOfBirth => _editingCustomer == null;
 
         public bool CanEditCustomerId => _editingCustomer == null;
+
+        public bool CanEditBalance => _editingCustomer == null;
         public string ButtonText => _editingCustomer != null ? "Update Customer" : "Add Customer";
 
         private bool CanSaveChanges(object parameter)
@@ -190,7 +204,8 @@ namespace BankingApp.UI.ViewModels
                     Email = this.Email,
                     Address = this.Address,
                     PhoneNumber = this.PhoneNumber,
-                    AccountType = this.AccountType
+                    AccountType = this.AccountType,
+                    Balance = this.Balance
                 };
 
                 _customerService.InsertCustomer(newCustomer);

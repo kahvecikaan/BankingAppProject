@@ -67,6 +67,7 @@
                 <DataGridTextColumn Header="Address" Binding="{Binding Address}" />
                 <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}" />
                 <DataGridTextColumn Header="Account Type" Binding="{Binding AccountType}" />
+                <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" />
 
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>

@@ -14,6 +14,6 @@ namespace BankingApp.Domain
         public decimal? AmountDueTo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string BillStatus { get; set; }
+        public int? BillStatus{ get; set; }
     }
 }

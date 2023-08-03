@@ -70,7 +70,7 @@
                             SelectedValue="{Binding BillFilter.BillStatus}" 
                             ItemsSource="{Binding BillStatuses}" 
                             DisplayMemberPath="Description"
-                            SelectedValuePath="Description"/>
+                            SelectedValuePath="Code"/>
 
 
                 <Button Content="Search" Command="{Binding SearchBillsCommand}" Margin="5" Width="75" Grid.Row="4" Grid.Column="0"/>
@@ -87,7 +87,7 @@
                 <DataGridTextColumn Header="Date Issued" Binding="{Binding DateIssued, StringFormat=d}"/>
                 <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat=d}" />
                 <DataGridTextColumn Header="Amount Due" Binding="{Binding AmountDue}" />
-                <DataGridTextColumn Header="Bill Status" Binding="{Binding BillStatus}" />
+                <DataGridTextColumn Header="Bill Status" Binding="{Binding BillStatusDescription}" />
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

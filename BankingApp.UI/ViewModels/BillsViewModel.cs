@@ -79,7 +79,7 @@ namespace BankingApp.UI.ViewModels
             var addBillsViewModel = new AddBillsViewModel(_billService, _customerService, _parameterService, _navigationService, _eventAggregator, SelectedBill.ToBill());
             _navigationService.Navigate(addBillsViewModel);
         }
-        
+
         private void NavigateToAddBill(object obj)
         {
             var addBillsViewModel = new AddBillsViewModel(_billService, _customerService, _parameterService, _navigationService, _eventAggregator);
@@ -88,7 +88,10 @@ namespace BankingApp.UI.ViewModels
 
         private void OnBillUpdated(BillUpdatedEvent billUpdatedEvent)
         {
+            //Refresh the BillsCollection
             Bills = new ObservableCollection<BillDetails>(_billService.FetchAllBillDetails());
+
+            // Notify any data bindings that the Bills property has changed
             OnPropertyChanged(nameof(Bills));
         }
 
@@ -101,6 +104,7 @@ namespace BankingApp.UI.ViewModels
             {
                 Bills.Add(bill);
             }
+
             OnPropertyChanged(nameof(Bills)); // Notify UI about the changes
         }
     }

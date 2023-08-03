@@ -9,6 +9,6 @@ namespace BankingApp.Domain
         public DateTime DateIssued { get; set; }
         public DateTime DueDate { get; set; }
         public decimal AmountDue { get; set; }
-        public string BillStatus { get; set; }
+        public int BillStatus { get; set; }
     }
 }

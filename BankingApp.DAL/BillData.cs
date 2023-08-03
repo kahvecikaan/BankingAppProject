@@ -117,7 +117,7 @@ namespace BankingApp.DAL
                             bill.DateIssued = (DateTime)reader["DateIssued"];
                             bill.DueDate = (DateTime)reader["DueDate"];
                             bill.AmountDue = (decimal)reader["AmountDue"];
-                            bill.BillStatus = reader["BillStatus"].ToString();
+                            bill.BillStatus = (int)reader["BillStatus"];
                             bills.Add(bill);
                         }
                     }
@@ -186,7 +186,7 @@ namespace BankingApp.DAL
                             bill.DateIssued = (DateTime)reader["DateIssued"];
                             bill.DueDate = (DateTime)reader["DueDate"];
                             bill.AmountDue = (decimal)reader["AmountDue"];
-                            bill.BillStatus = reader["BillStatus"].ToString();
+                            bill.BillStatus = (int)reader["BillStatus"];
                             bills.Add(bill);
                         }
                     }
@@ -230,7 +230,7 @@ namespace BankingApp.DAL
                             bill.DateIssued = (DateTime)reader["DateIssued"];
                             bill.DueDate = (DateTime)reader["DueDate"];
                             bill.AmountDue = (decimal)reader["AmountDue"];
-                            bill.BillStatus = reader["BillStatus"].ToString();
+                            bill.BillStatus = (int)reader["BillStatus"];
                         }
                     }
 
@@ -275,7 +275,7 @@ namespace BankingApp.DAL
                             billDetails.DateIssued = (DateTime)reader["DateIssued"];
                             billDetails.DueDate = (DateTime)reader["DueDate"];
                             billDetails.AmountDue = (decimal)reader["AmountDue"];
-                            billDetails.BillStatus = reader["BillStatus"].ToString();
+                            billDetails.BillStatusDescription = reader["BillStatusDescription"].ToString();
                             billDetailsList.Add(billDetails);
                         }
                     }
@@ -333,7 +333,7 @@ namespace BankingApp.DAL
                             billDetails.DateIssued = (DateTime)reader["DateIssued"];
                             billDetails.DueDate = (DateTime)reader["DueDate"];
                             billDetails.AmountDue = (decimal)reader["AmountDue"];
-                            billDetails.BillStatus = reader["BillStatus"].ToString();
+                            billDetails.BillStatusDescription = reader["BillStatusDescription"].ToString();
                             billDetailsList.Add(billDetails);
                         }
                     }

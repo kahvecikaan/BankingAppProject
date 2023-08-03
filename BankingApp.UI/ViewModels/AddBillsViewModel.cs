@@ -5,7 +5,7 @@ using BankingApp.Domain;
 using BankingApp.UI.Commands;
 using BankingApp.UI.NavigationServices;
 using BankingApp.UI.Events;
-using System.Collections.Generic;
+using System.Linq;
 using System.Collections.ObjectModel;
 
 namespace BankingApp.UI.ViewModels
@@ -17,51 +17,47 @@ namespace BankingApp.UI.ViewModels
         private readonly ParameterService _parameterService;
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
-        // private readonly UserService _userService;
         private int _customerId;
         private DateTime _dateIssued;
         private DateTime _dueDate;
         private decimal _amountDue;
-        private string _billStatus;
-        //private Bill _selectedBill;
+        private BillStatusItem _billStatus;
         private Bill _editingBill;
-
-        private List<Parameter> _billStatusParameters;
 
         public System.Action ClearFieldsAction { get; set; }
         public System.Action CloseAction { get; set; }
         public RelayCommand SaveChangesCommand { get; }
 
-
         public AddBillsViewModel(BillService billService, CustomerService customerService, ParameterService parameterService, INavigationService navigationService, IEventAggregator eventAggregator, Bill editingBill = null)
         {
             _billService = billService;
             _customerService = customerService;
+            _parameterService = parameterService;
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
 
             _editingBill = editingBill;
-            OnPropertyChanged(nameof(ButtonText)); // notify View about ButtonText changes
+            OnPropertyChanged(nameof(ButtonText));
 
-            BillStatusParameters = parameterService.FetchParametersByType("BillStatus");
+            var parameters = _parameterService.FetchParametersByType("BillStatus");
+            BillStatusParameters = new ObservableCollection<BillStatusItem>(
+                parameters.Select(p => new BillStatusItem { Code = p.Code, Description = p.Description }));
 
             SaveChangesCommand = new RelayCommand(SaveChanges, CanSaveChanges);
 
-            //AddBillCommand = new RelayCommand(AddBill, CanAddBill);
-            //UpdateBillCommand = new RelayCommand(UpdateBill, CanUpdateBill);
-
-            if(_editingBill != null)
+            if (_editingBill != null)
             {
                 CustomerId = _editingBill.CustomerId;
                 DateIssued = _editingBill.DateIssued;
                 DueDate = _editingBill.DueDate;
                 AmountDue = _editingBill.AmountDue;
-                BillStatus = _editingBill.BillStatus;
+                BillStatus = BillStatusParameters.FirstOrDefault(bs => bs.Code == _editingBill.BillStatus);
             }
             else
             {
                 _dateIssued = DateTime.Today;
                 _dueDate = DateTime.Today;
+                BillStatus = BillStatusParameters.First();
             }
         }
 
@@ -104,8 +100,8 @@ namespace BankingApp.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-        
-        public string BillStatus
+
+        public BillStatusItem BillStatus
         {
             get { return _billStatus; }
             set
@@ -115,15 +111,7 @@ namespace BankingApp.UI.ViewModels
             }
         }
 
-        public List<Parameter> BillStatusParameters
-        {
-            get { return _billStatusParameters; }
-            set
-            {
-                _billStatusParameters = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<BillStatusItem> BillStatusParameters { get; set; }
 
         public bool CanEditCustomerId => _editingBill == null;
         public string ButtonText => _editingBill != null ? "Update Bill" : "Add Bill";
@@ -139,23 +127,19 @@ namespace BankingApp.UI.ViewModels
 
             if (_editingBill != null)
             {
-                // editing an existing bill, update its properties
                 _editingBill.CustomerId = this.CustomerId;
                 _editingBill.DateIssued = this.DateIssued;
                 _editingBill.DueDate = this.DueDate;
                 _editingBill.AmountDue = this.AmountDue;
-                _editingBill.BillStatus = this.BillStatus;
+                _editingBill.BillStatus = BillStatus.Code;
+
                 _billService.UpdateBill(_editingBill);
-
                 bill = _editingBill;
-
-                // _eventAggregator.Publish(new BillUpdatedEvent { UpdatedBill = _editingBill });
 
                 MessageBox.Show("Bill updated successfully");
             }
             else
             {
-                // creating a new bill, validate the customer first
                 if (_customerService.IsCustomerExist(CustomerId))
                 {
                     var newBill = new Bill
@@ -164,27 +148,25 @@ namespace BankingApp.UI.ViewModels
                         DateIssued = this.DateIssued,
                         DueDate = this.DueDate,
                         AmountDue = this.AmountDue,
-                        BillStatus = this.BillStatus                       
+                        BillStatus = BillStatus.Code
                     };
 
                     _billService.InsertBill(newBill);
-                    bill = newBill; // store the reference to the new bill
+                    bill = newBill;
 
                     MessageBox.Show("New bill added successfully!");
                 }
                 else
                 {
-                    MessageBox.Show("The provied CustomerId does not exist. Please check and try again", "Invalid CustomerID", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("The provided CustomerId does not exist. Please check and try again", "Invalid CustomerID", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            
+
             if (bill != null)
             {
-                // publish the event to notify other parts of the app about the change
                 _eventAggregator.Publish(new BillUpdatedEvent { UpdatedBill = bill });
             }
-            
-            // clear fields and close the window after saving changes
+
             ClearFieldsAction?.Invoke();
             CloseAction?.Invoke();
         }

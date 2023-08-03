@@ -11,7 +11,7 @@ namespace BankingApp.Domain
         public DateTime DateIssued { get; set; }
         public DateTime DueDate { get; set; }
         public decimal AmountDue { get; set; }
-        public string BillStatus { get; set; }
+        public string BillStatusDescription { get; set; }
 
         public Bill ToBill()
         {
@@ -22,7 +22,7 @@ namespace BankingApp.Domain
                 DateIssued = this.DateIssued,
                 DueDate = this.DueDate,
                 AmountDue = this.AmountDue,
-                BillStatus = this.BillStatus
+                BillStatus = this.BillStatusDescription == "Due" ? 1 : 2
             };
         }
     }

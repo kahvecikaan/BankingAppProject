@@ -92,5 +92,72 @@ namespace BankingApp.DAL
                 }
             }
         }
+
+        public int GetParameterIdByValue(string type, string description)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.GetParameterIdByValue", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@Type", type);
+                    command.Parameters.AddWithValue("@Description", description);
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1);
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+
+                    int code = (int)command.ExecuteScalar();
+
+                    if ((int)returnValue.Value == -1)
+                    {
+                        throw new Exception($"An error occurred during the GetParameterIdByValue procedure in the database: {errorMessageParam.Value}");
+                    }
+
+                    return code;
+                }
+            }
+        }
+
+        public string GetParameterValueById(string type, int code)
+        {
+            using (SqlConnection connection = new SqlConnection(this.connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("dbo.GetParameterValueById", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@Type", type);
+                    command.Parameters.AddWithValue("@Code", code);
+
+                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1);
+                    errorMessageParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(errorMessageParam);
+
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    command.Parameters.Add(returnValue);
+
+                    connection.Open();
+
+                    string description = command.ExecuteScalar() as string;
+
+                    if ((int)returnValue.Value == -1)
+                    {
+                        throw new Exception($"An error occurred during the GetParameterValueById procedure in the database: {errorMessageParam.Value}");
+                    }
+
+                    return description;
+                }
+            }
+        }
+
     }
 }

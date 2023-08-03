@@ -73,6 +73,7 @@ namespace BankingApp.UI.ViewModels
             }
             else
             {
+                UserSession.CurrentUser = user;
                 MainViewModel mainViewModel = new MainViewModel(_userService, _customerService, _billService, _parameterService, _navigationService, _eventAggregator);
                 _navigationService.Navigate(mainViewModel);
                 CloseAction?.Invoke(); // Close the LoginWindow

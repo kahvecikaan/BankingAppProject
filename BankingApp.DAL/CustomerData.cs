@@ -27,6 +27,7 @@ namespace BankingApp.DAL
                     command.Parameters.AddWithValue("@Address", customer.Address);
                     command.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
                     command.Parameters.AddWithValue("@AccountType", customer.AccountType);
+                    command.Parameters.AddWithValue("@Balance", customer.Balance);
 
                     SqlParameter outputIdParam = new SqlParameter("@NewCustomerId", SqlDbType.Int);
                     outputIdParam.Direction = ParameterDirection.Output;
@@ -120,6 +121,7 @@ namespace BankingApp.DAL
                             customer.Address = reader["Address"].ToString();
                             customer.PhoneNumber = reader["PhoneNumber"].ToString();
                             customer.AccountType = reader["AccountType"].ToString();
+                            customer.Balance = (decimal)reader["Balance"];
                         }
                     }
 
@@ -196,6 +198,7 @@ namespace BankingApp.DAL
                             customer.Address = reader["Address"].ToString();
                             customer.PhoneNumber = reader["PhoneNumber"].ToString();
                             customer.AccountType = reader["AccountType"].ToString();
+                            customer.Balance = (decimal)reader["Balance"];
                             customers.Add(customer);
                         }
                     }
@@ -243,6 +246,7 @@ namespace BankingApp.DAL
                             customerDetails.Address = reader["Address"].ToString();
                             customerDetails.PhoneNumber = reader["PhoneNumber"].ToString();
                             customerDetails.AccountType = reader["AccountType"].ToString();
+                            customerDetails.Balance = (decimal)reader["Balance"];
                             customerDetailsList.Add(customerDetails);
                         }
                     }
@@ -294,6 +298,7 @@ namespace BankingApp.DAL
                             customerDetails.Address = reader["Address"].ToString();
                             customerDetails.PhoneNumber = reader["PhoneNumber"].ToString();
                             customerDetails.AccountType = reader["AccountType"].ToString();
+                            customerDetails.Balance = (decimal)reader["Balance"];
                             customerDetailsList.Add(customerDetails);
                         }
                     }
