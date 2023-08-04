@@ -68,6 +68,11 @@ namespace BankingApp.DAL
                     command.Parameters.AddWithValue("@FirstName", customer.FirstName);
                     command.Parameters.AddWithValue("@LastName", customer.LastName);
                     command.Parameters.AddWithValue("@DateOfBirth", customer.DateOfBirth);
+                    command.Parameters.AddWithValue("@Email", customer.Email);
+                    command.Parameters.AddWithValue("@Address", customer.Address);
+                    command.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
+                    command.Parameters.AddWithValue("@AccountType", customer.AccountType);
+                    command.Parameters.AddWithValue("@Balance", customer.Balance);
 
                     SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1); // NVARCHAR(MAX), -1 indicates 'max'
                     errorMessageParam.Direction = ParameterDirection.Output;

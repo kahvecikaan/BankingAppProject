@@ -14,7 +14,7 @@ namespace BankingApp.UI.ViewModels
         private readonly CustomerService _customerService;
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
-        private int _customerId;
+        // private int _customerId;
         private string _firstName;
         private string _lastName;
         private string _address;
@@ -43,7 +43,7 @@ namespace BankingApp.UI.ViewModels
             SaveChangesCommand = new RelayCommand(SaveChanges, CanSaveChanges);
             if(_editingCustomer != null)
             {
-                _customerId = _editingCustomer.CustomerId;
+                // _customerId = _editingCustomer.CustomerId;
                 _firstName = _editingCustomer.FirstName;
                 _lastName = _editingCustomer.LastName;
                 _address = _editingCustomer.Address;
@@ -59,15 +59,15 @@ namespace BankingApp.UI.ViewModels
             }
         }
 
-        public int CustomerId
-        {
-            get { return _customerId; }
-            set
-            {
-                _customerId = value;
-                OnPropertyChanged();
-            }
-        }
+        //public int CustomerId
+        //{
+        //    get { return _customerId; }
+        //    set
+        //    {
+        //        _customerId = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         public string FirstName
         {
@@ -162,11 +162,11 @@ namespace BankingApp.UI.ViewModels
             }
         }
 
-        public bool CanEditDateOfBirth => _editingCustomer == null;
+        // public bool CanEditDateOfBirth => _editingCustomer == null;
 
-        public bool CanEditCustomerId => _editingCustomer == null;
+        // public bool CanEditCustomerId => _editingCustomer == null;
 
-        public bool CanEditBalance => _editingCustomer == null;
+        // public bool CanEditBalance => _editingCustomer == null;
         public string ButtonText => _editingCustomer != null ? "Update Customer" : "Add Customer";
 
         private bool CanSaveChanges(object parameter)
@@ -197,7 +197,7 @@ namespace BankingApp.UI.ViewModels
                 // Creating a new customer
                 var newCustomer = new Customer
                 {
-                    CustomerId = this.CustomerId,
+                    // CustomerId = this.CustomerId,
                     FirstName = this.FirstName,
                     LastName = this.LastName,
                     DateOfBirth = this.DateOfBirth,

@@ -20,8 +20,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Customer ID:" Grid.Column="0" Grid.Row="0" Margin="0,0,10,0"/>
-        <TextBox x:Name="CustomerIdTextBox" Grid.Column="1" Grid.Row="0" Width="150" Text="{Binding CustomerId, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanEditCustomerId}"/>
+        <!--<Label Content="Customer ID:" Grid.Column="0" Grid.Row="0" Margin="0,0,10,0"/>
+        <TextBox x:Name="CustomerIdTextBox" Grid.Column="1" Grid.Row="0" Width="150" Text="{Binding CustomerId, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanEditCustomerId}"/>-->
 
         <Label Content="First Name:" Grid.Column="0" Grid.Row="1" Margin="0,10,10,0"/>
         <TextBox x:Name="FirstNameTextBox" Grid.Column="1" Grid.Row="1" Width="150" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
