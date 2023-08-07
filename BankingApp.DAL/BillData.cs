@@ -340,7 +340,7 @@ namespace BankingApp.DAL
 
                     if ((int)returnValue.Value == -1)
                     {
-                        throw new Exception($"An exception occurred during the FetchAllBillDetails procedure in the database: {errorMessageParam.Value}");
+                        throw new Exception($"An exception occurred during the SearchBillDetails procedure in the database: {errorMessageParam.Value}");
                     }
 
                     return billDetailsList;

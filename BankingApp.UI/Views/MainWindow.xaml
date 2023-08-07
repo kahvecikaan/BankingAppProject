@@ -36,5 +36,13 @@
             <!-- Button template -->
         </Button>
 
+        <Button Content="Manage Transactions" Command="{Binding NavigateToManageTransactionsCommand}"
+        Width="200" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,265,0,0"
+        Background="#FB6107" Foreground="#231123" BorderBrush="#6369D1" BorderThickness="2" 
+        FontSize="16" FontWeight="Bold">
+            <!-- Button template -->
+        </Button>
+
+
     </Grid>
 </Window>

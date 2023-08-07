@@ -1,7 +1,7 @@
 ﻿using BankingApp.BLL;
 using BankingApp.UI.Commands;
 using BankingApp.UI.NavigationServices;
-using BankingApp.UI.Events;
+using BankingApp.Common.Events;
 
 namespace BankingApp.UI.ViewModels
 {
@@ -15,26 +15,31 @@ namespace BankingApp.UI.ViewModels
         private readonly BillService _billService;
         private readonly ParameterService _parameterService;
         private readonly IEventAggregator _eventAggregator;
+        private readonly TransactionService _transactionService;
 
         // public RelayCommand NavigateToSearchCommand { get; set; }
         // public RelayCommand NavigateToAddBillCommand { get; set; }
         public RelayCommand NavigateToBillsCommand { get; set; }
-
         public RelayCommand NavigateToManageCustomersCommand { get; set; }
+        public RelayCommand NavigateToManageTransactionsCommand { get; set; }
 
-        public MainViewModel(UserService userService, CustomerService customerService, BillService billService, ParameterService parameterService, INavigationService navigationService, IEventAggregator eventAggregator)
+        public MainViewModel(UserService userService, CustomerService customerService, BillService billService, ParameterService parameterService, INavigationService navigationService, IEventAggregator eventAggregator, TransactionService transactionService)
         {
             _userService = userService;
             _customerService = customerService;
             _billService = billService;
             _parameterService = parameterService;
+            _transactionService = transactionService;
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
+
             LogoutCommand = new RelayCommand(Logout, _ => true);
             // NavigateToSearchCommand = new RelayCommand(NavigateToSearch, _ => true);
             // NavigateToAddBillCommand = new RelayCommand(NavigateToAddBill, _ => true);
+
             NavigateToBillsCommand = new RelayCommand(NavigateToBills, _ => true);
             NavigateToManageCustomersCommand = new RelayCommand(NavigateToManageCustomers, _ => true);
+            NavigateToManageTransactionsCommand = new RelayCommand(NavigateToManageTransactions, _ => true);
         }
 
         //private void NavigateToSearch(object obj)
@@ -61,9 +66,15 @@ namespace BankingApp.UI.ViewModels
             _navigationService.Navigate(manageCustomersViewModel);
         }
 
+        private void NavigateToManageTransactions(object obj)
+        {
+            var manageTransactionsViewModel = new ManageTransactionsViewModel(_transactionService, _customerService, _parameterService, _navigationService, _eventAggregator);
+            _navigationService.Navigate(manageTransactionsViewModel);
+        }
+
         private void Logout(object obj)
         {
-            LoginViewModel loginViewModel = new LoginViewModel(_userService, _customerService, _billService, _parameterService, _navigationService, _eventAggregator);
+            LoginViewModel loginViewModel = new LoginViewModel(_userService, _customerService, _billService, _parameterService, _navigationService, _eventAggregator, _transactionService);
             _navigationService.Navigate(loginViewModel);
         }
     }

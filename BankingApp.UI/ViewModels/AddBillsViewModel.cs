@@ -7,6 +7,7 @@ using BankingApp.UI.NavigationServices;
 using BankingApp.UI.Events;
 using System.Linq;
 using System.Collections.ObjectModel;
+using BankingApp.Common.Events;
 
 namespace BankingApp.UI.ViewModels
 {
@@ -165,6 +166,11 @@ namespace BankingApp.UI.ViewModels
             if (bill != null)
             {
                 _eventAggregator.Publish(new BillUpdatedEvent { UpdatedBill = bill });
+            }
+
+            if(bill != null && BillStatus.Code == 2)
+            {
+                _eventAggregator.Publish(new Common.BillPaidEvent { PaidBill = bill });
             }
 
             ClearFieldsAction?.Invoke();

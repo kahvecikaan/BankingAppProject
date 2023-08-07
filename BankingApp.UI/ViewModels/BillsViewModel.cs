@@ -4,6 +4,7 @@ using BankingApp.UI.Commands;
 using BankingApp.UI.NavigationServices;
 using System.Collections.ObjectModel;
 using BankingApp.UI.Events;
+using BankingApp.Common.Events;
 
 namespace BankingApp.UI.ViewModels
 {

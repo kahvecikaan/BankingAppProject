@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BankingApp.UI.Events
+namespace BankingApp.Common.Events
 {
     public interface IEventAggregator
     {

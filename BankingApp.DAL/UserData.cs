@@ -38,6 +38,7 @@ namespace BankingApp.DAL
                         if (reader.Read())
                         {
                             user = new User();
+                            user.UserId = (int)reader["UserId"];
                             user.Username = reader["Username"].ToString();
                             user.Password = reader["Password"].ToString();
                         }

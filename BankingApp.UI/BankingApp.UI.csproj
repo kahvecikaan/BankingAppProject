@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BankingApp.BLL\BankingApp.BLL.csproj" />
+    <ProjectReference Include="..\BankingApp.Common\BankingApp.Common.csproj" />
     <ProjectReference Include="..\BankingApp.Domain\BankingApp.Domain.csproj" />
   </ItemGroup>
 

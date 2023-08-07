@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingApp.DAL", "BankingApp.DAL\BankingApp.DAL.csproj", "{1DEF6A2B-94B3-40DC-9DAE-01F6C4E08913}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingApp.BLL", "BankingApp.BLL\BankingApp.BLL.csproj", "{E5FEE846-8FA5-4DC2-A903-C8A1AC398F45}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5174A214-CB6E-4528-A2D8-7F4408EE67D5} = {5174A214-CB6E-4528-A2D8-7F4408EE67D5}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingApp.PasswordUpdater", "BankingApp.PasswordUpdater\BankingApp.PasswordUpdater.csproj", "{C2E91ACC-0E48-4711-8A47-8168A5B56F52}"
 EndProject
@@ -14,6 +17,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingApp.UI", "BankingApp.UI\BankingApp.UI.csproj", "{A62EBD1B-BA20-4207-B2D8-C1FC5D186939}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PasswordUtility", "PasswordUtility\PasswordHelper\PasswordUtility.csproj", "{279B6A86-B95E-4F14-988F-E2E65C8057AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingApp.Common", "BankingApp.Common\BankingApp.Common.csproj", "{5174A214-CB6E-4528-A2D8-7F4408EE67D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +50,10 @@ Global
 		{279B6A86-B95E-4F14-988F-E2E65C8057AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{279B6A86-B95E-4F14-988F-E2E65C8057AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{279B6A86-B95E-4F14-988F-E2E65C8057AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5174A214-CB6E-4528-A2D8-7F4408EE67D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5174A214-CB6E-4528-A2D8-7F4408EE67D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5174A214-CB6E-4528-A2D8-7F4408EE67D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5174A214-CB6E-4528-A2D8-7F4408EE67D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

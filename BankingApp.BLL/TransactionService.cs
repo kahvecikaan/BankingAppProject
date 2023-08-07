@@ -5,7 +5,7 @@ using BankingApp.Domain;
 
 namespace BankingApp.BLL
 {
-    class TransactionService
+    public class TransactionService
     {
         private readonly TransactionData _transactionData;
 
@@ -32,6 +32,16 @@ namespace BankingApp.BLL
         public List<Transaction> FetchTransactionByUser(int userId)
         {
             return this._transactionData.FetchTransactionsByUser(userId);
-        } 
+        }
+        
+        public List<TransactionDetails> FetchAllTransactionDetails()
+        {
+            return this._transactionData.FetchAllTransactionDetails();
+        }
+
+        public List<TransactionDetails> SearchTransactionDetails(TransactionFilter filter)
+        {
+            return this._transactionData.SearchTransactionDetails(filter);
+        }
     }
 }

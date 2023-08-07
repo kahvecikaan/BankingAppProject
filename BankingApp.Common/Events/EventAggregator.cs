@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BankingApp.UI.Events
+namespace BankingApp.Common.Events
 {
     public class EventAggregator : IEventAggregator
     {

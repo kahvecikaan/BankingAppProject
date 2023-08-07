@@ -44,6 +44,14 @@ namespace BankingApp.UI.NavigationServices
                     var manageCustomersWindow = new ManageCustomersWindow(manageCustomersViewModel);
                     manageCustomersWindow.Show();
                     break;
+                case ManageTransactionsViewModel manageTransactionsViewModel:
+                    var manageTransactionsWindow = new ManageTransactionsWindow(manageTransactionsViewModel);
+                    manageTransactionsWindow.Show();
+                    break;
+                case AddTransactionsViewModel addTransactionsViewModel:
+                    var addTransactionsWindow = new AddTransactionsWindow(addTransactionsViewModel);
+                    addTransactionsWindow.Show();
+                    break;
             }
         }
     }
