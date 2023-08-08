@@ -54,7 +54,7 @@ namespace BankingApp.UI.ViewModels
             var transactions = _transactionService.SearchTransactionDetails(TransactionFilter);
             Transactions.Clear();
 
-            foreach(var transaction in transactions)
+            foreach (var transaction in transactions)
             {
                 Transactions.Add(transaction);
             }

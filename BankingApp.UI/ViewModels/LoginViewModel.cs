@@ -3,6 +3,7 @@ using BankingApp.UI.Commands;
 using BankingApp.UI.NavigationServices;
 using System;
 using System.Windows;
+using BankingApp.Common;
 using BankingApp.Common.Events;
 
 namespace BankingApp.UI.ViewModels
@@ -75,7 +76,7 @@ namespace BankingApp.UI.ViewModels
             }
             else
             {
-                UserSession.CurrentUser = user;
+                Common.UserSession.CurrentUser = user;
                 MainViewModel mainViewModel = new MainViewModel(_userService, _customerService, _billService, _parameterService, _navigationService, _eventAggregator, _transactionService);
                 _navigationService.Navigate(mainViewModel);
                 CloseAction?.Invoke(); // Close the LoginWindow

@@ -80,7 +80,7 @@ namespace BankingApp.UI.ViewModels
                     CustomerId = this.CustomerId,
                     TransactionAmount = this.TransactionAmount,
                     TransactionType = TransactionType.Code,
-                    UserId = UserSession.CurrentUser.UserId,
+                    UserId = Common.UserSession.CurrentUser.UserId,
                     TransactionDate = DateTime.Now
                 };
 

@@ -124,57 +124,68 @@ namespace BankingApp.UI.ViewModels
 
         public void SaveChanges(object parameter)
         {
-            Bill bill = null;
+            try 
+            { 
+                Bill bill = null;
 
-            if (_editingBill != null)
-            {
-                _editingBill.CustomerId = this.CustomerId;
-                _editingBill.DateIssued = this.DateIssued;
-                _editingBill.DueDate = this.DueDate;
-                _editingBill.AmountDue = this.AmountDue;
-                _editingBill.BillStatus = BillStatus.Code;
-
-                _billService.UpdateBill(_editingBill);
-                bill = _editingBill;
-
-                MessageBox.Show("Bill updated successfully");
-            }
-            else
-            {
-                if (_customerService.IsCustomerExist(CustomerId))
+                if (_editingBill != null)
                 {
-                    var newBill = new Bill
-                    {
-                        CustomerId = this.CustomerId,
-                        DateIssued = this.DateIssued,
-                        DueDate = this.DueDate,
-                        AmountDue = this.AmountDue,
-                        BillStatus = BillStatus.Code
-                    };
+                    _editingBill.CustomerId = this.CustomerId;
+                    _editingBill.DateIssued = this.DateIssued;
+                    _editingBill.DueDate = this.DueDate;
+                    _editingBill.AmountDue = this.AmountDue;
+                    _editingBill.BillStatus = BillStatus.Code;
 
-                    _billService.InsertBill(newBill);
-                    bill = newBill;
+                    _billService.UpdateBill(_editingBill);
+                    bill = _editingBill;
 
-                    MessageBox.Show("New bill added successfully!");
+                    MessageBox.Show("Bill updated successfully");
                 }
                 else
                 {
-                    MessageBox.Show("The provided CustomerId does not exist. Please check and try again", "Invalid CustomerID", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    if (_customerService.IsCustomerExist(CustomerId))
+                    {
+                        var newBill = new Bill
+                        {
+                            CustomerId = this.CustomerId,
+                            DateIssued = this.DateIssued,
+                            DueDate = this.DueDate,
+                            AmountDue = this.AmountDue,
+                            BillStatus = BillStatus.Code
+                        };
+
+                        _billService.InsertBill(newBill);
+                        bill = newBill;
+
+                        MessageBox.Show("New bill added successfully!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The provided CustomerId does not exist. Please check and try again", "Invalid CustomerID", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
-            }
 
-            if (bill != null)
+                if (bill != null)
+                {
+                    _eventAggregator.Publish(new BillUpdatedEvent { UpdatedBill = bill });
+                }
+
+                if (bill != null && BillStatus.Code == 2)
+                {
+                    _eventAggregator.Publish(new Common.BillPaidEvent { PaidBill = bill });
+                }
+
+                ClearFieldsAction?.Invoke();
+                CloseAction?.Invoke();
+        }
+            catch (BusinessException ex)
             {
-                _eventAggregator.Publish(new BillUpdatedEvent { UpdatedBill = bill });
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            if(bill != null && BillStatus.Code == 2)
+            catch (Exception ex) // Catch other unexpected exceptions
             {
-                _eventAggregator.Publish(new Common.BillPaidEvent { PaidBill = bill });
+                MessageBox.Show("An unexpected error occurred. Please try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            ClearFieldsAction?.Invoke();
-            CloseAction?.Invoke();
         }
     }
 }

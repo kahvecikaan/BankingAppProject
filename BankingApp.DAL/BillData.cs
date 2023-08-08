@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections.Generic;
 using BankingApp.Domain;
+using BankingApp.Common;
 
 namespace BankingApp.DAL
 {
@@ -60,6 +61,7 @@ namespace BankingApp.DAL
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
+                    command.Parameters.AddWithValue("@UserId", UserSession.CurrentUser.UserId);
                     command.Parameters.AddWithValue("@BillId", bill.BillId);
                     command.Parameters.AddWithValue("@CustomerId", bill.CustomerId);
                     command.Parameters.AddWithValue("@DateIssued", bill.DateIssued);
@@ -79,7 +81,8 @@ namespace BankingApp.DAL
                     command.ExecuteNonQuery();
 
                     if ((int)returnValue.Value == -1)
-                        throw new Exception($"An error occurred during the UpdateBill procedure in the database: {errorMessageParam.Value}");
+                        throw new DatabaseException("An error occurred during the UpdateBill procedure in the database", "UpdateBill", errorMessageParam.Value.ToString());
+
                     return true;
                 }
             }

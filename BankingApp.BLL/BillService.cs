@@ -30,11 +30,18 @@ namespace BankingApp.BLL
 
         public bool UpdateBill(Bill bill)
         {
-            if (!_customerService.IsCustomerExist(bill.CustomerId))
+            try
             {
-                throw new Exception($"Customer with {bill.CustomerId} does not exist!");
+                if (!_customerService.IsCustomerExist(bill.CustomerId))
+                {
+                    throw new Exception($"Customer with {bill.CustomerId} does not exist!");
+                }
+                return this._billData.UpdateBill(bill);
             }
-            return this._billData.UpdateBill(bill);
+            catch(DatabaseException ex)
+            {
+                throw new BusinessException("Failed to update bill: " + ex.Message);
+            }
         }
 
         public List<Bill> FetchBillsByCustomer(int customerId)

@@ -53,7 +53,7 @@ namespace BankingApp.DAL
             }
         }
 
-       public List<Transaction>  FetchTransactionsByCustomer(int customerId)
+       public List<Transaction> FetchTransactionsByCustomer(int customerId)
         {
             var transactions = new List<Transaction>();
             using (SqlConnection connection = new SqlConnection(this.connectionString))

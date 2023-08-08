@@ -26,7 +26,7 @@ namespace BankingApp.BLL
                 TransactionType = 3,
                 TransactionAmount = billPaidEvent.PaidBill.AmountDue,
                 CustomerId = billPaidEvent.PaidBill.CustomerId,
-                UserId = UserSession.CurrentUser.UserId
+                UserId = Common.UserSession.CurrentUser.UserId
             };
             _transactionService.InsertTransaction(transaction);
         }

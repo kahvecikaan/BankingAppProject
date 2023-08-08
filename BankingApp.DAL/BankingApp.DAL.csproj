@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\PasswordHelper\PasswordHelper\PasswordUtility.csproj" />
+    <ProjectReference Include="..\BankingApp.Common\BankingApp.Common.csproj" />
     <ProjectReference Include="..\BankingApp.Domain\BankingApp.Domain.csproj" />
     <ProjectReference Include="..\PasswordUtility\PasswordHelper\PasswordUtility.csproj" />
   </ItemGroup>

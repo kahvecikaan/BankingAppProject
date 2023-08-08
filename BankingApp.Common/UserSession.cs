@@ -1,6 +1,6 @@
 ﻿using BankingApp.Domain;
 
-namespace BankingApp.BLL
+namespace BankingApp.Common
 {
     public static class UserSession
     {
