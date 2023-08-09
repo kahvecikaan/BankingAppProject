@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using BankingApp.BLL;
 using BankingApp.DAL;
 using BankingApp.UI.NavigationServices;

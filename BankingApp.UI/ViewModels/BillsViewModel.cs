@@ -1,4 +1,4 @@
-﻿using BankingApp.BLL;
+using BankingApp.BLL;
 using BankingApp.Domain;
 using BankingApp.UI.Commands;
 using BankingApp.UI.NavigationServices;

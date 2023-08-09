@@ -16,20 +16,5 @@ namespace BankingApp.BLL
         {
             return this._parameterData.FetchParametersByType(type);
         }
-
-        public List<string> FetchAllAccountTypes()
-        {
-            return this._parameterData.FetchAllAccountTypes();
-        }
-
-        public int GetParameterIdByValue(string type, string description)
-        {
-            return _parameterData.GetParameterIdByValue(type, description);
-        }
-
-        public string GetParameterValueById(string type, int code)
-        {
-            return _parameterData.GetParameterValueById(type, code);
-        }
     }
 }

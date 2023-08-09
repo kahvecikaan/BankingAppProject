@@ -15,7 +15,6 @@ namespace BankingApp.UI.ViewModels
         private readonly CustomerService _customerService;
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
-        // private int _customerId;
         private string _firstName;
         private string _lastName;
         private string _address;
@@ -44,7 +43,6 @@ namespace BankingApp.UI.ViewModels
             SaveChangesCommand = new RelayCommand(SaveChanges, CanSaveChanges);
             if(_editingCustomer != null)
             {
-                // _customerId = _editingCustomer.CustomerId;
                 _firstName = _editingCustomer.FirstName;
                 _lastName = _editingCustomer.LastName;
                 _address = _editingCustomer.Address;
@@ -59,16 +57,6 @@ namespace BankingApp.UI.ViewModels
                 _dateOfBirth = DateTime.Today;
             }
         }
-
-        //public int CustomerId
-        //{
-        //    get { return _customerId; }
-        //    set
-        //    {
-        //        _customerId = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
 
         public string FirstName
         {

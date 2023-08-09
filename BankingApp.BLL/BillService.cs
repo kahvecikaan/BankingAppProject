@@ -44,25 +44,11 @@ namespace BankingApp.BLL
             }
         }
 
-        public List<Bill> FetchBillsByCustomer(int customerId)
-        {
-            return this._billData.FetchBillsByCustomer(customerId);
-        }
 
         public void DeleteBill(int billId)
         {
             this._billData.DeleteBill(billId);
-        }
-
-        public List<Bill> FetchAllBills()
-        {
-            return this._billData.FetchAllBills();
-        }
-
-        public Bill FetchBillById(int billId)
-        {
-            return this._billData.FetchBillById(billId);
-        }
+        }       
 
         public List<BillDetails> FetchAllBillDetails()
         {

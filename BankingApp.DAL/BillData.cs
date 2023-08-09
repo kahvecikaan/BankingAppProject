@@ -88,51 +88,6 @@ namespace BankingApp.DAL
             }
         }
 
-        public List<Bill> FetchBillsByCustomer(int customerId)
-        {
-            var bills = new List<Bill>();
-
-            using (SqlConnection connection = new SqlConnection(this.connectionString))
-            {
-                using (SqlCommand command = new SqlCommand("dbo.FetchBillsByCustomer", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    command.Parameters.AddWithValue("@CustomerId", customerId);
-
-                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1); // NVARCHAR(MAX), -1 indicates 'max'
-                    errorMessageParam.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(errorMessageParam);
-
-                    SqlParameter returnValue = new SqlParameter();
-                    returnValue.Direction = ParameterDirection.ReturnValue;
-                    command.Parameters.Add(returnValue);
-
-                    connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var bill = new Bill();
-                            bill.BillId = (int)reader["BillId"];
-                            bill.CustomerId = (int)reader["CustomerId"];
-                            bill.DateIssued = (DateTime)reader["DateIssued"];
-                            bill.DueDate = (DateTime)reader["DueDate"];
-                            bill.AmountDue = (decimal)reader["AmountDue"];
-                            bill.BillStatus = (int)reader["BillStatus"];
-                            bills.Add(bill);
-                        }
-                    }
-
-                    if ((int)returnValue.Value == -1)
-                        throw new Exception($"An error occurred during the FetchBillsByCustomer procedure in the database: {errorMessageParam.Value}");
-
-                    return bills;
-                }
-            }
-        }
-
         public void DeleteBill(int billId)
         {
             using (SqlConnection connection = new SqlConnection(this.connectionString))
@@ -158,94 +113,7 @@ namespace BankingApp.DAL
                         throw new Exception($"An error occurred during the DeleteBill procedure in the database: {errorMessageParam.Value}");
                 }
             }
-        }
-
-        public List<Bill> FetchAllBills()
-        {
-            var bills = new List<Bill>();
-            using (SqlConnection connection = new SqlConnection(this.connectionString))
-            {
-                using (SqlCommand command = new SqlCommand("dbo.FetchAllBills", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1); // NVARCHAR(MAX), -1 indicates 'max'
-                    errorMessageParam.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(errorMessageParam);
-
-                    SqlParameter returnValue = new SqlParameter();
-                    returnValue.Direction = ParameterDirection.ReturnValue;
-                    command.Parameters.Add(returnValue);
-
-                    connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var bill = new Bill();
-                            bill.BillId = (int)reader["BillId"];
-                            bill.CustomerId = (int)reader["CustomerId"];
-                            bill.DateIssued = (DateTime)reader["DateIssued"];
-                            bill.DueDate = (DateTime)reader["DueDate"];
-                            bill.AmountDue = (decimal)reader["AmountDue"];
-                            bill.BillStatus = (int)reader["BillStatus"];
-                            bills.Add(bill);
-                        }
-                    }
-
-                    if ((int)returnValue.Value == -1)
-                    {
-                        throw new Exception($"An error occurred during the FetchAllBills procedure in the database: {errorMessageParam.Value}");
-                    }
-                    return bills;
-                }
-            }
-        }
-
-        public Bill FetchBillById(int billId)
-        {
-            Bill bill = null;
-            using(SqlConnection connection = new SqlConnection(this.connectionString))
-            {
-                using(SqlCommand command = new SqlCommand("dbo.FetchBillById", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    command.Parameters.AddWithValue("@BillId", billId);
-
-                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1); // NVARCHAR(MAX), -1 indicates that 'max'
-                    errorMessageParam.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(errorMessageParam);
-
-                    SqlParameter returnValue = new SqlParameter();
-                    returnValue.Direction = ParameterDirection.ReturnValue;
-
-                    connection.Open();
-
-                    using(SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            bill = new Bill();
-                            bill.BillId = (int)reader["BillId"];
-                            bill.CustomerId = (int)reader["CustomerId"];
-                            bill.DateIssued = (DateTime)reader["DateIssued"];
-                            bill.DueDate = (DateTime)reader["DueDate"];
-                            bill.AmountDue = (decimal)reader["AmountDue"];
-                            bill.BillStatus = (int)reader["BillStatus"];
-                        }
-                    }
-
-                    if ((int)returnValue.Value == -1)
-                    {
-                        throw new Exception($"An error occurred during the FetchBillById procedure in the database: {errorMessageParam.Value}");
-                    }
-
-                    return bill;
-                }
-            }
-        }
+        }   
 
         public List<BillDetails> FetchAllBillDetails()
         {

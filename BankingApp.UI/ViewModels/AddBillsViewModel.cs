@@ -25,8 +25,8 @@ namespace BankingApp.UI.ViewModels
         private BillStatusItem _billStatus;
         private Bill _editingBill;
 
-        public System.Action ClearFieldsAction { get; set; }
-        public System.Action CloseAction { get; set; }
+        public Action ClearFieldsAction { get; set; }
+        public Action CloseAction { get; set; }
         public RelayCommand SaveChangesCommand { get; }
 
         public AddBillsViewModel(BillService billService, CustomerService customerService, ParameterService parameterService, INavigationService navigationService, IEventAggregator eventAggregator, Bill editingBill = null)
