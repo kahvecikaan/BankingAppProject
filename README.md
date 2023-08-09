@@ -1,20 +1,14 @@
 # BankingApp
 
-BankingApp is a .NET Core WPF application that simulates a simple banking system.
+BankingApp is a .NET Core WPF application that simulates a simple banking system. It provides functionalities to manage bills, customers, and transactions within a virtual banking environment.
 
 ## Database Structure
 
 The application uses a SQL Server database with the following tables:
 
-1. **Actions**
-    - ActionId (PK)
-    - UserId (FK)
-    - CustomerId (FK)
-    - ActionType
-    - ActionDate
-    - Details
 
-2. **Bills**
+
+1. **Bills**
     - BillId(PK)
     - CustomerId (FK)
     - DateIssued
@@ -22,7 +16,7 @@ The application uses a SQL Server database with the following tables:
     - AmountDue
     - BillStatus
 
-3. **Customers**
+2. **Customers**
     - CustomerId (PK)
     - FirstName
     - LastName
@@ -32,7 +26,7 @@ The application uses a SQL Server database with the following tables:
     - PhoneNumber
     - AccountType
 
-4. **Transactions**
+3. **Transactions**
     - TransactionId (PK)
     - UserId (FK)
     - TransactionAmount
@@ -40,10 +34,16 @@ The application uses a SQL Server database with the following tables:
     - TransactionDate
     - CustomerId (FK)
 
-5. **Users** (which represents bankers)
+4. **Users** (which represents bankers)
     - UserId (PK)
     - Username
     - Password
+	
+5. **Parameters**
+	- Type (PK)
+	- Code (PK)
+	- Description 
+	- Active
 
 ## App.config
 
