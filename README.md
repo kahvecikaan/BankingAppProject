@@ -1,6 +1,6 @@
 # BankingApp
 
-BankingApp is a .NET Core WPF application that simulates a simple banking system. It provides functionalities to manage bills, customers, and transactions within a virtual banking environment.
+BankingApp is a .NET Core WPF application that simulates a simple banking system. It provides functionalities to manage bills, customers, and transactions within a virtual banking environment. (For more information look at the **BankingAppDocumentation**)
 
 ## Database Structure
 
