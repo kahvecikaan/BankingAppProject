@@ -125,7 +125,7 @@ namespace BankingApp.DAL
                             customer.DateOfBirth = (DateTime)reader["DateOfBirth"];
                             customer.Address = reader["Address"].ToString();
                             customer.PhoneNumber = reader["PhoneNumber"].ToString();
-                            customer.AccountType = reader["AccountType"].ToString();
+                            customer.AccountType = (int)reader["AccountType"];
                             customer.Balance = (decimal)reader["Balance"];
                         }
                     }
@@ -168,56 +168,6 @@ namespace BankingApp.DAL
             }
         }
 
-        public List<Customer> SearchCustomers(int? customerId, string firstName, string lastName)
-        {
-            List<Customer> customers = new List<Customer>();
-            using (SqlConnection connection = new SqlConnection(this.connectionString))
-            {
-                using(SqlCommand command = new SqlCommand("dbo.SearchCustomers", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    command.Parameters.AddWithValue("@CustomerId", (object)customerId ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@FirstName", string.IsNullOrEmpty(firstName) ? string.Empty : firstName); 
-                    command.Parameters.AddWithValue("@LastName", string.IsNullOrEmpty(lastName) ? string.Empty : lastName);
-
-                    SqlParameter errorMessageParam = new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, -1); // NVARCHAR(MAX), -1 indicates 'max'
-                    errorMessageParam.Direction = ParameterDirection.Output;
-                    command.Parameters.Add(errorMessageParam);
-
-                    SqlParameter returnValue = new SqlParameter();
-                    returnValue.Direction = ParameterDirection.ReturnValue;
-                    command.Parameters.Add(returnValue);
-
-                    connection.Open();
-
-                    using(SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while(reader.Read())
-                        {
-                            var customer = new Customer();
-                            customer.CustomerId = (int)reader["CustomerId"];
-                            customer.FirstName = reader["FirstName"].ToString();
-                            customer.LastName = reader["LastName"].ToString();
-                            customer.DateOfBirth = (DateTime)reader["DateOfBirth"];
-                            customer.Address = reader["Address"].ToString();
-                            customer.PhoneNumber = reader["PhoneNumber"].ToString();
-                            customer.AccountType = reader["AccountType"].ToString();
-                            customer.Balance = (decimal)reader["Balance"];
-                            customers.Add(customer);
-                        }
-                    }
-
-                    if((int)returnValue.Value == -1)
-                    {
-                        throw new Exception($"An error occurred during the SearchCustomer procedure in the database: {errorMessageParam.Value}");
-                    }
-
-                    return customers;
-                }
-            }
-        }
-
         public List<CustomerDetails> FetchAllCustomerDetails()
         {
             var customerDetailsList = new List<CustomerDetails>();
@@ -250,7 +200,7 @@ namespace BankingApp.DAL
                             customerDetails.Email = reader["Email"].ToString();
                             customerDetails.Address = reader["Address"].ToString();
                             customerDetails.PhoneNumber = reader["PhoneNumber"].ToString();
-                            customerDetails.AccountType = reader["AccountType"].ToString();
+                            customerDetails.AccountTypeDescription = reader["AccountTypeDescription"].ToString();
                             customerDetails.Balance = (decimal)reader["Balance"];
                             customerDetailsList.Add(customerDetails);
                         }
@@ -302,7 +252,7 @@ namespace BankingApp.DAL
                             customerDetails.Email = reader["Email"].ToString();
                             customerDetails.Address = reader["Address"].ToString();
                             customerDetails.PhoneNumber = reader["PhoneNumber"].ToString();
-                            customerDetails.AccountType = reader["AccountType"].ToString();
+                            customerDetails.AccountTypeDescription = reader["AccountTypeDescription"].ToString();
                             customerDetails.Balance = (decimal)reader["Balance"];
                             customerDetailsList.Add(customerDetails);
                         }

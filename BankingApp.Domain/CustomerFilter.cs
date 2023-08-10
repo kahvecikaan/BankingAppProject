@@ -5,6 +5,6 @@
         public int? CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string AccountType { get; set; }
+        public int? AccountType { get; set; }
     }
 }

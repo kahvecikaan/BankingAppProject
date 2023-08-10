@@ -39,7 +39,7 @@
                 <ComboBox ItemsSource="{Binding AccountTypes}" 
                           SelectedValue="{Binding CustomerFilter.AccountType}" 
                           DisplayMemberPath="Description" 
-                          SelectedValuePath="Description"  
+                          SelectedValuePath="Code"  
                           Width="70" Margin="5" Grid.Row="3" Grid.Column="1"/>
             </Grid>
 
@@ -66,7 +66,7 @@
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
                 <DataGridTextColumn Header="Address" Binding="{Binding Address}" />
                 <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}" />
-                <DataGridTextColumn Header="Account Type" Binding="{Binding AccountType}" />
+                <DataGridTextColumn Header="Account Type" Binding="{Binding AccountTypeDescription}" />
                 <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" />
 
                 <DataGridTemplateColumn Header="Actions">

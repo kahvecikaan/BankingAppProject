@@ -33,11 +33,6 @@ namespace BankingApp.BLL
             this._customerData.DeleteCustomer(customerId);
         }
 
-        public List<Customer> SearchCustomers(int? customerId, string firstName, string lastName)
-        {
-            return this._customerData.SearchCustomers(customerId, firstName, lastName);
-        }
-
         public bool IsCustomerExist(int customerId)
         {
             return this._customerData.FetchCustomer(customerId) != null;

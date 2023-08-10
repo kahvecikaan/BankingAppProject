@@ -11,7 +11,7 @@ namespace BankingApp.Domain
         public string Email { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
-        public string AccountType { get; set; }
+        public string AccountTypeDescription { get; set; }
         public decimal Balance { get; set; }
 
         public Customer ToCustomer()
@@ -25,7 +25,7 @@ namespace BankingApp.Domain
                 Email = this.Email,
                 Address = this.Address,
                 PhoneNumber = this.PhoneNumber,
-                AccountType = this.AccountType,
+                AccountType = this.AccountTypeDescription == "Savings" ? 1 : 2,
                 Balance = this.Balance
             };
         }

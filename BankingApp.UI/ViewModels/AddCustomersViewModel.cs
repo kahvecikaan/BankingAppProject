@@ -7,6 +7,8 @@ using BankingApp.UI.NavigationServices;
 using BankingApp.UI.Events;
 using System.Collections.Generic;
 using BankingApp.Common.Events;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace BankingApp.UI.ViewModels
 {
@@ -21,11 +23,13 @@ namespace BankingApp.UI.ViewModels
         private string _email;
         private DateTime _dateOfBirth;
         private string _phoneNumber;
-        private string _accountType;
+        private AccountTypeItem _accountType;
         private decimal _balance;
         private Customer _editingCustomer;
 
         private List<Parameter> _accountTypeParameters;
+
+        public ObservableCollection<AccountTypeItem> AccountTypeParameters { get; set; }
 
         public System.Action ClearFieldsAction { get; set; }
         public System.Action CloseAction { get; set; }
@@ -38,7 +42,9 @@ namespace BankingApp.UI.ViewModels
             _eventAggregator = eventAggregator;
             _editingCustomer = editingCustomer;
 
-            AccountTypeParameters = parameterService.FetchParametersByType("AccountType");
+            var parameters = parameterService.FetchParametersByType("AccountType");
+            AccountTypeParameters = new ObservableCollection<AccountTypeItem>(
+                parameters.Select(p => new AccountTypeItem { Code = p.Code, Description = p.Description }));
 
             SaveChangesCommand = new RelayCommand(SaveChanges, CanSaveChanges);
             if(_editingCustomer != null)
@@ -49,7 +55,7 @@ namespace BankingApp.UI.ViewModels
                 _dateOfBirth = _editingCustomer.DateOfBirth;
                 _email = _editingCustomer.Email;
                 _phoneNumber = _editingCustomer.PhoneNumber;
-                _accountType = _editingCustomer.AccountType;
+                _accountType = AccountTypeParameters.FirstOrDefault(at => at.Code == _editingCustomer.AccountType);
                 _balance = _editingCustomer.Balance;
             }
             else
@@ -121,7 +127,7 @@ namespace BankingApp.UI.ViewModels
             }
         }
 
-        public string AccountType
+        public AccountTypeItem AccountType
         {
             get { return _accountType; }
             set
@@ -141,15 +147,15 @@ namespace BankingApp.UI.ViewModels
             }
         }
 
-        public List<Parameter> AccountTypeParameters
-        {
-            get { return _accountTypeParameters; }
-            set
-            {
-                _accountTypeParameters = value;
-                OnPropertyChanged();
-            }
-        }
+        //public List<Parameter> AccountTypeParameters
+        //{
+        //    get { return _accountTypeParameters; }
+        //    set
+        //    {
+        //        _accountTypeParameters = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         // public bool CanEditDateOfBirth => _editingCustomer == null;
 
@@ -173,7 +179,7 @@ namespace BankingApp.UI.ViewModels
                 _editingCustomer.LastName = this.LastName;
                 _editingCustomer.Email = this.Email;
                 _editingCustomer.Address = this.Address;
-                _editingCustomer.AccountType = this.AccountType;
+                _editingCustomer.AccountType = this.AccountType.Code;
                 _editingCustomer.PhoneNumber = this.PhoneNumber;
                 _editingCustomer.Balance = this.Balance;
                 _customerService.UpdateCustomer(_editingCustomer);
@@ -194,7 +200,7 @@ namespace BankingApp.UI.ViewModels
                     Email = this.Email,
                     Address = this.Address,
                     PhoneNumber = this.PhoneNumber,
-                    AccountType = this.AccountType,
+                    AccountType = this.AccountType.Code,
                     Balance = this.Balance
                 };
 
