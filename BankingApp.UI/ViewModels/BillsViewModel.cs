@@ -1,10 +1,10 @@
+﻿using System.Collections.ObjectModel;
 using BankingApp.BLL;
+using BankingApp.Common.Events;
 using BankingApp.Domain;
 using BankingApp.UI.Commands;
-using BankingApp.UI.NavigationServices;
-using System.Collections.ObjectModel;
 using BankingApp.UI.Events;
-using BankingApp.Common.Events;
+using BankingApp.UI.NavigationServices;
 
 namespace BankingApp.UI.ViewModels
 {

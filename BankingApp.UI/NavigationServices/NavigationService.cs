@@ -24,10 +24,6 @@ namespace BankingApp.UI.NavigationServices
                     var mainWindow = new MainWindow(mainViewModel);
                     mainWindow.Show();
                     break;
-                case SearchCustomersViewModel searchCustomersViewModel:
-                    var searchCustomersWindow = new SearchCustomersWindow(searchCustomersViewModel);
-                    searchCustomersWindow.Show();
-                    break;
                 case AddBillsViewModel addBillsViewModel:
                     var addBillsWindow = new AddBillsWindow(addBillsViewModel);
                     addBillsWindow.Show();

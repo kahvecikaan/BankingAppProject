@@ -175,6 +175,7 @@ namespace BankingApp.UI.ViewModels
                 _editingCustomer.Address = this.Address;
                 _editingCustomer.AccountType = this.AccountType;
                 _editingCustomer.PhoneNumber = this.PhoneNumber;
+                _editingCustomer.Balance = this.Balance;
                 _customerService.UpdateCustomer(_editingCustomer);
 
                 customer = _editingCustomer;
