@@ -48,7 +48,7 @@ namespace BankingApp.DAL
                     {
                         throw new Exception($"An error occurred during the FetchUser procedure in the database: {errorMessageParam.Value}");
                     }
-                    return user;       
+                    return user;
                 }
             }
         }
