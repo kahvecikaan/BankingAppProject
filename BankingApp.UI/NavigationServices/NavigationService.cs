@@ -16,7 +16,7 @@ namespace BankingApp.UI.NavigationServices
         {
             switch (viewModel)
             {
-                case LoginViewModel loginViewModel:
+                case LoginViewModel loginViewModel: 
                     var loginWindow = new LoginWindow(loginViewModel);
                     loginWindow.Show();
                     break;

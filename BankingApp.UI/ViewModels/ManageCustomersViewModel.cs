@@ -42,8 +42,6 @@ namespace BankingApp.UI.ViewModels
         
         public ObservableCollection<CustomerDetails> Customers { get; set; }
 
-        //public ObservableCollection<string> AccountTypes { get; set; }
-
         public ObservableCollection<Parameter> AccountTypes { get; set; }
 
         public RelayCommand DeleteCustomerCommand { get; set; }
